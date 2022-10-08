@@ -1,0 +1,24 @@
+/*
+ * @Author: Olivia
+ * @Date: 2022-04-19 10:26:08
+ * @LastEditors: Olivia
+ * @LastEditTime: 2022-04-20 16:57:48
+ * @Description: el-tabs
+ */
+
+// 下划线
+.el-tabs__active-bar {
+    background: linear-gradient(90deg, #1F6BFF, #BE26FF)
+}
+
+.el-tabs__item.is-active {
+    color: #272F3A
+}
+
+.el-tabs__item {
+    color: #999999
+}
+
+.el-tabs__item:hover {
+    color: #272F3A
+}

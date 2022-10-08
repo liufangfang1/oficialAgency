@@ -1,0 +1,152 @@
+/*
+ * @Author: Olivia
+ * @Date: 2022-04-19 10:23:49
+ * @LastEditors: Olivia
+ * @LastEditTime: 2022-08-03 14:30:36
+ * @Description: el-table
+ */
+// 列表字体颜色
+.el-table {
+    color: rgb(46, 46, 46);
+}
+
+.el-table thead {
+    color: rgb(46, 46, 46);
+    font-weight: 400;
+}
+
+// 复选框
+.el-checkbox__inner {
+    background-color: #dedede;
+}
+
+.el-checkbox__inner:hover {
+    border-color: #7c8491;
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner {
+    background-color: #dedede;
+    border-color: #7c8491;
+}
+
+.el-checkbox__inner::after {
+    border: 1px solid #333e4b;
+    border-left: 0;
+    border-top: 0;
+}
+
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: #dedede;
+    border-color: #7c8491;
+}
+
+.el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    border: 1px solid #333e4b;
+}
+
+// 鼠标移入或点击高亮
+.el-table__body tr.current-row>td.el-table__cell {
+    background: rgba(88, 176, 37, 0.2);
+}
+
+.el-table .sort-caret.ascending {
+    border-bottom-color: #dedede;
+}
+
+.el-table .sort-caret.descending {
+    border-top-color: #dedede;
+}
+
+.el-table .ascending .sort-caret.ascending {
+    border-bottom-color: #fff;
+}
+
+.el-table .descending .sort-caret.descending {
+    border-top-color: #fff;
+}
+
+// 表头
+.tb-header-cell {
+    background-color: #7a8490 !important;
+    font-size: 15px;
+    color: #fff !important;
+    height: 40px;
+    line-height: 24px;
+    letter-spacing: 1px;
+}
+
+.el-table__header-wrapper,
+.el-table__footer-wrapper {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+// 行
+.tb-row {
+    background: rgba(255, 255, 255, 0.39);
+}
+
+// 分页
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+    background: linear-gradient(90deg, #1f6bff 0%, #be26ff 100%);
+}
+
+.el-select-dropdown__item.selected {
+    color: #1f6bff;
+}
+
+.pagination-container[data-v-72233bcd] {
+    // background: #f1f3f6;
+    padding: 0 !important;
+    float: right;
+}
+
+.el-pagination {
+    float: right;
+}
+
+
+// 完整功能 + 背景
+.pageAll {
+
+    .el-pagination.is-background .btn-prev,
+    .el-pagination.is-background .btn-next,
+    .el-pagination.is-background .el-pager li {
+        background-color: #DEDEDE;
+    }
+}
+
+.pageAll {
+
+    .el-pagination.is-background .btn-prev,
+    .el-pagination.is-background .btn-next,
+    .el-pagination.is-background .el-pager li {
+        background-color: #DEDEDE;
+    }
+}
+
+// 基础 + 背景
+.pageSimple {
+
+    .el-pagination.is-background .btn-prev,
+    .el-pagination.is-background .btn-next,
+    .el-pagination.is-background .el-pager li {
+        border: 1px solid #DDDDDD;
+    }
+}
+
+.el-popper[x-placement^=top] .popper__arrow::after{
+    border-top-color:#DEDEDE
+}
+
+
+// 滚动条样式
+.el-table__body-wrapper::-webkit-scrollbar {
+    width: 10px; // 横向滚动条
+    height: 10px; // 纵向滚动条 必写
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+    background-color: #dedede; //颜色
+    border-radius: 5px; //圆角
+}
