@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-06 19:36:59
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-08 16:28:54
+ * @LastEditTime: 2022-10-08 17:20:49
  * @FilePath: \relytosoft-mizar-media-uie:\project\egProject\src\views\homePage\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -84,7 +84,7 @@ export default {
   top: 7.22%;
   width: 21%;
   height: 87.7%;
-  background: pink;
+  background: yellow;
 }
 .right {
   position: absolute;
@@ -92,7 +92,7 @@ export default {
   top: 7.22%;
   width: 21%;
   height: 87.7%;
-  background: pink;
+  background: yellow;
 }
 .centerBottom{
   width: 47.34%;
