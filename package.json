@@ -21,6 +21,7 @@
     "@liveqing/liveplayer": "^2.6.7",
     "@riophae/vue-treeselect": "0.4.0",
     "@types/three": "^0.144.0",
+    "animate.css": "^4.1.1",
     "axios": "0.24.0",
     "clipboard": "2.0.8",
     "copy-webpack-plugin": "^4.6.0",
