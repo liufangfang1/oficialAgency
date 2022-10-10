@@ -33,6 +33,18 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+  font-family:'avenir';
+    src: url('Avenir-BlackOblique.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+  font-family:'hemi';
+    src: url('hemi\ head\ bd\ it.otf');
+    font-weight: normal;
+    font-style: normal;
+}
 /* DIN */
 @font-face {
   font-family: 'DIN-MEDIUM';

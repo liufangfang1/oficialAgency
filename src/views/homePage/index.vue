@@ -1,39 +1,32 @@
-<!--
- * @Author: liufang 1164457816@qq.com
- * @Date: 2022-10-06 19:36:59
- * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-08 18:07:49
- * @FilePath: \relytosoft-mizar-media-uie:\project\egProject\src\views\homePage\index.vue
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
+
 <template>
 
   <div id="data-view">
     <dv-full-screen-container>
       <CenterCom class="CenterCom"></CenterCom>
+      <header class="animate__animated animate__bounceInDown">
+        工务署智慧展馆综合管理平台
+      </header>
       <!-- 左右区域 -->
       <div class="content">
-        <div   class="left animate__animated animate__bounceInLeft">
-          left
-        </div >
+        <div class="left animate__animated animate__bounceInLeft">
+          <LeftCom> </LeftCom>
+        </div>
         <div class="right animate__animated animate__bounceInRight">
-          right
+          <RightCom></RightCom>
         </div>
       </div>
       <!-- 中部按钮 -->
       <div class="centerBottom animate__animated animate__bounceInUp">
+        <div v-for="(item,index) in tab" :key="index" :class="currentIndex==index?'active_bgimg ':'bgimg'" @click="handleClick(item,index)">
+          <p>{{item}}</p>
+        </div>
 
       </div>
+      <!-- log0 -->
+      <img class="logo" src="../../assets/images/homepage/logo.png" alt="">
       <!-- 底部 -->
-      <footer>
-        <div>
-
-        </div>
-        <div>
-
-        </div>
-      </footer>
-
+      <FooterCom></FooterCom>
     </dv-full-screen-container>
 
   </div>
@@ -43,17 +36,32 @@
   <script>
 
 import CenterCom from './component/center.vue'
+import LeftCom from './component/left.vue'
+import RightCom from './component/right.vue'
+import FooterCom from './component/footer.vue'
 
 export default {
   name: "",
-  components: { CenterCom },
-  created() {
+  components: { CenterCom, LeftCom, RightCom, FooterCom },
+  data() {
+    return {
+      currentIndex:0,
+      tab: ['基地概括', '展示中心', '预约中心', '安防态势', '智慧管理', '工务署']
+    }
   },
+  methods:{
+    handleClick(item,index){
+      this.currentIndex=index
+    }
+  }
+
+
 
 };
   </script>
   
-  <style scoped>
+  <style scoped lang="scss">
+/* @import url('../../assets/styles/homePage.css'); */
 #data-view {
   width: 100%;
   height: 100%;
@@ -72,6 +80,18 @@ export default {
   margin-top: 5%;
   margin: auto;
 }
+header {
+  width: 100%;
+  height: 100px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  font-family: "ysbth";
+  position: absolute;
+  top: 0;
+  letter-spacing: 2px;
+}
 .content {
   display: flex;
   justify-content: space-between;
@@ -82,10 +102,11 @@ export default {
   top: 7.22%;
   width: 21%;
   height: 87.7%;
-  background: yellow;
-  animate-delay: 1s;  
-  animate-duration: 2s 
-  
+  /* background: yellow; */
+  animate-delay: 1s;
+  animate-duration: 2s;
+  background-image: url("../../assets/images/homepage/leftborder.png");
+  background-size: 100% 100%;
 }
 .right {
   position: absolute;
@@ -93,34 +114,51 @@ export default {
   top: 7.22%;
   width: 21%;
   height: 87.7%;
-  background: yellow;
+  background-image: url("../../assets/images/homepage/rightborder.png");
+  background-size: 100% 100%;
 }
 .centerBottom {
   width: 47.34%;
-  height: 62px;
-  background: yellow;
+  height: 2.87%;
   position: absolute;
   bottom: 10.28%;
   left: 26.35%;
-}
-footer {
   display: flex;
-  justify-content: space-between;
+  font-size: 17px;
+  color: white;
+  font-family: "ysbth";
+  div {
+    width: 15%;
+    height: 100%;
+    margin-left: 2%;
+    // background-image: url("../../assets/images/homepage/butbg.png");
+    background-size: 100% 100%;
+    text-align: center;
+    line-height: 17%;
+    letter-spacing: 3px;
+  }
 }
-footer > div:nth-child(1) {
-  position: absolute;
-  bottom: 0;
-  left: 1.38%;
-  width: 21%;
-  height: 5%;
-  background: yellow;
+.bgimg{
+  background-image: url("../../assets/images/homepage/butbg.png");
 }
-footer > div:nth-child(2) {
+.active_bgimg{
+  background-image: url("../../assets/images/homepage/butbg_active.png");
+}
+.logo {
+  width: 12.16%;
+  height: 2.59vh;
   position: absolute;
-  bottom: 0;
-  right: 1.38%;
-  width: 21%;
-  height: 5%;
-  background: yellow;
+  bottom: 3%;
+  left: 44.35%;
+}
+@media screen and (width: 3840px) {
+  header {
+    font-size: 52px;
+    line-height: 100px;
+    letter-spacing: 5px;
+  }
+  .centerBottom {
+    font-size: 34px;
+  }
 }
 </style>

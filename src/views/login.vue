@@ -1,63 +1,38 @@
 <template>
   <div class="login">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" status-icon>
-      <h3 class="title">登录</h3>
-      <el-form-item prop="username">
-        <el-input
-          v-model="loginForm.username"
-          type="text"
-          auto-complete="off"
-          placeholder="账号"
-        >
-          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
-        </el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input
-          v-model="loginForm.password"
-          type="password"
-          auto-complete="off"
-          placeholder="密码"
-          @keyup.enter.native="handleLogin"
-        >
-          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
-        </el-input>
-      </el-form-item>
-      <el-form-item prop="code" v-if="captchaOnOff">
-        <el-input
-          v-model="loginForm.code"
-          auto-complete="off"
-          placeholder="验证码"
-          style="width: 63%"
-          @keyup.enter.native="handleLogin"
-        >
-          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
-        </el-input>
-        <div class="login-code">
-          <img :src="codeUrl" @click="getCode" class="login-code-img"/>
-        </div>
-      </el-form-item>
-      <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
-      <el-form-item style="width:100%;">
-        <el-button
-          :loading="loading"
-          size="medium"
-          type="primary"
-          style="width:100%;"
-          @click.native.prevent="handleLogin"
-        >
-          <span v-if="!loading">登 录</span>
-          <span v-else>登 录 中...</span>
-        </el-button>
-        <div style="float: right;" v-if="register">
+    <!-- <dv-full-screen-container> -->
+      <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" status-icon>
+        <p class="title">欢迎登录<span class="span">Welcome to Login</span></p>
+        <el-form-item prop="username">
+          <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="请输入用户名">
+            <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input v-model="loginForm.password" type="password" auto-complete="off" placeholder="请输入密码" @keyup.enter.native="handleLogin">
+            <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="code" v-if="captchaOnOff">
+          <el-input v-model="loginForm.code" auto-complete="off" placeholder="验证码" style="width: 63%" @keyup.enter.native="handleLogin">
+            <!-- <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" /> -->
+            <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
+          </el-input>
+          <div class="login-code">
+            <img :src="codeUrl" @click="getCode" class="login-code-img" />
+          </div>
+        </el-form-item>
+        <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
+        <el-form-item style="width:100%;">
+          <el-button class="butsub" :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
+            <span>登陆</span>
+          </el-button>
+          <!-- <div style="float: right;" v-if="register">
           <router-link class="link-type" :to="'/register'">立即注册</router-link>
-        </div>
-      </el-form-item>
-    </el-form>
-    <!--  底部  -->
-    <!-- <div class="el-login-footer">
-      <span>Copyright © 2018-2022 Relytosoft All Rights Reserved.</span>
-    </div> -->
+        </div> -->
+        </el-form-item>
+      </el-form>
+    <!-- </dv-full-screen-container> -->
   </div>
 </template>
 
@@ -72,8 +47,8 @@ export default {
     return {
       codeUrl: "",
       loginForm: {
-        username: "admin",
-        password: "123456",
+        username: "",
+        password: "",
         rememberMe: false,
         code: "",
         uuid: "",
@@ -99,7 +74,7 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect;
       },
       immediate: true
@@ -143,7 +118,7 @@ export default {
             Cookies.remove('rememberMe');
           }
           this.$store.dispatch("Login", this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || "/" }).catch(()=>{ this.loading = false;});
+            this.$router.push({ path: this.redirect || "/" }).catch(() => { this.loading = false; });
           }).catch(() => {
             this.loading = false;
             if (this.captchaOnOff) {
@@ -157,7 +132,7 @@ export default {
 };
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
+<style rel="stylesheet/scss" lang="scss" scoped>
 .login {
   display: flex;
   justify-content: center;
@@ -165,28 +140,64 @@ export default {
   height: 100%;
   background-image: url("../assets/images/login-background.png");
   background-size: cover;
+  position: relative;
 }
 .title {
-  margin: 0px auto 30px auto;
-  text-align: center;
-  color: #707070;
+  //   width: 4.19%;
+  // height: 1.43%;
+  font-size: 30px;
+  font-family: "ysbth";
+  color: #ffffff;
+  font-weight: normal;
 }
-
+.span {
+  font-size: 20px;
+  font-family: "avenir";
+  margin-left: 10px;
+}
 .login-form {
-  border-radius: 6px;
-  background: #ffffff;
-  width: 400px;
-  padding: 25px 25px 5px 25px;
+  position: absolute;
+  right: 5.3%;
+  top: 25%;
+  // border-radius: 6px;
+  background-image: url("../assets/images/loginbg.png");
+  background-size: cover;
+  width: 27.84%;
+  height: 50.2%;
+  padding: 2% 2.68% 2% 2.68%;
   .el-input {
     height: 38px;
     input {
       height: 38px;
     }
   }
-  .input-icon {
-    height: 39px;
-    width: 14px;
-    margin-left: 2px;
+
+  // 改变input框背景颜色
+  ::v-deep.el-input__inner {
+    background-color: transparent !important;
+    border: 1px solid #61ffa9;
+    color: #ffffff;
+    font-family: "ysbth";
+  }
+  ::v-deep.el-checkbox__inner {
+    background-color: transparent !important;
+    border: 1px solid #61ffa9;
+  }
+  ::v-deep.el-checkbox__input.is-checked + .el-checkbox__label {
+    color: #FFFFFF;
+    font-family: "ysbth";
+  }
+  ::v-deep.el-input__inner {
+    &::placeholder {
+      color: #ffffff;
+      opacity: 0.5;
+      font-family: "ysbth";
+    }
+  }
+  ::v-deep.el-checkbox {
+    color: #ffffff;
+    opacity: 0.5;
+    font-family: "ysbth";
   }
 }
 .login-tip {
@@ -217,5 +228,100 @@ export default {
 }
 .login-code-img {
   height: 38px;
+}
+.input-icon {
+  height: 39px;
+  width: 14px;
+  margin-left: 2px;
+  color: #00fc8c;
+}
+.butsub {
+  margin-top: 20px;
+  span {
+    font-family: "ysbth";
+    font-size: 30px;
+    letter-spacing: 5px;
+    color: #FFFFFF;
+  }
+}
+.el-button--primary {
+  background: linear-gradient(270deg, rgba(97,255,169,0.19) 0%, #61FFA9 47%, rgba(97,255,169,0.19) 100%);
+opacity: 0.8;
+  color: #ffffff;
+  border: transparent;
+}
+@media screen and (width: 3840px) {
+  .title {
+    font-size: 42px;
+    .span {
+      font-size: 38px;
+      margin-left: 15px;
+    }
+  }
+  .login-form {
+    ::v-deep .el-input--medium .el-input__inner {
+      height: 87px;
+      margin-top: 55px;
+      font-size: 32px;
+      padding-left:110px
+
+    }
+
+    ::v-deep.el-input__prefix {
+      top: 70px;
+    }
+    ::v-deep.el-input__inner {
+      &::placeholder {
+    //  padding-left:86px;
+     padding-top: 10px;
+        font-size: 32px;
+      }
+    }
+    ::v-deep.el-checkbox__label {
+    margin-top: 78px;
+    font-size: 28px;
+    padding-left: 28px;
+    line-height: 32px;
+  }
+  ::v-deep .el-checkbox__inner::after{
+    height: 24px;
+    left: 14px;
+    width: 11px
+  }
+  ::v-deep.el-checkbox__inner{
+    width: 39px;
+    height: 39px;
+
+  }
+  ::v-deep .el-button--medium{
+    height: 100px;
+    font-size: 50px;
+  }
+  //检验文字
+  ::v-deep.el-form-item__error{
+    font-size: 28px;
+    top: 130%;
+  }
+   //检验图标
+  ::v-deep.el-input__suffix{
+    right: 18px;
+    top: 82px;
+    font-size: 28px;
+  }
+  }
+  .input-icon {
+    height: 51px;
+    width: 53px;
+    margin-left: 36px;
+   
+  }
+  .butsub {
+  margin-top: 80px;
+
+  span {
+    font-size: 50px;
+    letter-spacing: 10px;
+  }
+}
 }
 </style>

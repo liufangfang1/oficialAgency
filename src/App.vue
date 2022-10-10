@@ -1,11 +1,12 @@
 <!--
- * @Author: liufang
- * @Date: 2022-04-07 15:08:58
+ * @Author: liufang 1164457816@qq.com
+ * @Date: 2022-10-08 17:08:12
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-06-22 11:36:25
- * @FilePath: \visualizationd:\relytosoft-mizar-media-ui\src\App.vue
- * @Description: 
+ * @LastEditTime: 2022-10-09 15:23:04
+ * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\App.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
+
 <template>
   <div id="app">
     <router-view />
@@ -26,12 +27,5 @@ export default  {
 }
 </script>
 <style >
-/* .el-dialog__title{
-    color: #1890ff !important;
-    font-weight: 600;
-}
-.el-drawer__header{
-     color: #1890ff !important;
-    font-weight: 600;
-} */
+
 </style>
