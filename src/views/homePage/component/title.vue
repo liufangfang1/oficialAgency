@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-09 15:42:00
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-09 17:27:24
+ * @LastEditTime: 2022-10-10 14:30:31
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\homePage\component\title.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -25,7 +25,7 @@ export default {
 .title {
   width: 100%;
   height: 3.47%;
-  margin-top: 1.48%;
+  margin-top:4.48%;
 //   position: absolute;
   font-size: 18px;
   color: #FFFFFF;
@@ -36,7 +36,7 @@ export default {
   }
   p{
     position: absolute;
-    top: -1.216%;
+    top: 0%;
     left: 9.96%;
     letter-spacing: 2px;
     font-family: "ysbth";
@@ -59,4 +59,7 @@ export default {
  
 }
 }
+
+
+
 </style>

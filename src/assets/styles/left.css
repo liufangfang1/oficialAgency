@@ -1,0 +1,132 @@
+.reception {
+  width: 100%;
+  height: 7.59vh;
+  display: flex;
+  margin-top: 3%;
+  position: relative;
+}
+
+.receptionnum {
+  font-size: 12px;
+  font-family: "ysbth";
+  color: #BEF0FF;
+  margin-left: 10px;
+  letter-spacing: 2px;
+  margin-top: 10%;
+}
+.receptionimg{
+    width: 70px;
+    height: 71px;
+}
+.receptionimg1{
+    margin-left: 10%;
+
+}
+.receptionp{
+    font-family: "hemi";
+    font-size: 20px;
+    color: white;
+    margin-left: 10px;
+    letter-spacing: 2px;
+    margin-top: 6%;
+}
+.receptionspan1{
+    position: absolute;
+    top: 42%;
+    right: 42%;
+    font-size: 17px;
+    color: white;
+    font-family: "hemi";
+}
+.receptionspan2{
+    top: 42%;
+    right: 13%;
+}
+.age{
+    display: flex;
+    margin-top: 2%;
+}
+.age>span{
+    font-size: 12px;
+    font-family: "ysbth";
+    color: white;
+    letter-spacing: 2px;
+    margin: 2.5%;
+
+}
+.ageChart{
+    width: 100%;
+    height: 300px;
+}
+#ageChart{
+    width: 100%;
+    height: 100%;
+}
+.round {
+    height: 6px;
+    width: 6px;
+    margin-top: 15px;
+    background-color: #7ad5ff;
+    border-radius: 50%;
+    animation: breathe 1000ms ease infinite;
+  }
+  
+  @-webkit-keyframes breathe {
+    0% {
+      box-shadow: 0 1px 10px #73eeab;
+    }
+    50% {
+      box-shadow: 0 1px 15px #06e76c;
+    }
+    100% {
+      box-shadow: 0 1px 20px #81e7b1;
+    }
+  
+  }
+@media screen and (width: 3840px) {
+    .round {
+        height:15px;
+        width: 15px;
+        margin-top: 27px;
+        background-color: #7ad5ff;
+        border-radius: 50%;
+        animation: breathe 1000ms ease infinite;
+      }
+  .receptionnum {
+    font-size: 22px;
+
+  }
+  .receptionimg{
+    width: 141px;
+    height: 142px;
+}
+.receptionp{
+    font-size: 40px;
+}
+.receptionspan1{
+    right: 48%;
+    font-size: 35px;
+}
+.receptionspan2{
+    right: 19%;
+}
+@-webkit-keyframes breathe {
+    0% {
+      opacity: 0.2;
+      box-shadow: 0 1px 15px #c9f0da;
+    }
+    100% {
+      opacity: 1;
+      box-shadow: 0 1px 40px #7de9ad;
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 1px 20px #65eaa1;
+    }
+  }
+  .age>span{
+
+    font-size:22px;
+}
+
+}

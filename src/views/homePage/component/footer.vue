@@ -6,7 +6,7 @@
           <img class="footerimg" src="../../../assets/images/homepage/location.png" alt="">
           <p class="location">{{city}}</p>
           <img class="duoyunimg" src="../../../assets/images/homepage/duoyun.png" alt="">
-          <p class="wd" v-show="tem1">{{tem1}}℃ ~ {{tem2}}℃</p>
+          <p class="wd" v-show="tem1">{{tem1}} ℃ ~ {{tem2}} ℃</p>
           <p class="week">{{wea}} {{week}}</p>
         </div>
         <!-- 右边 -->
@@ -34,7 +34,7 @@ export default {
     }
   },
   created() {
-    this.getInTheatersData()
+    // this.getInTheatersData()
     this.timer = setInterval(() => {
       this.nowTimeAndDate();
     }, 1000);
