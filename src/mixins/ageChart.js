@@ -12,11 +12,11 @@ export default {
     }
   },
   methods: {
-   
+
     ageChartShow() {
       let yAxisData = ['>60', '50-60', '41-50', '31-40', '21-30', '<20'];
       // let data1 = [5, 19, 23, 43, 34, 53];
-      let data1 = [53, 34, 43, 23, 19,5];
+      let data1 = [53, 34, 43, 23, 19, 5];
       let data2 = [5, 12, 10, 7, 32, 40];
 
       var option = {
@@ -63,7 +63,7 @@ export default {
             },
             textStyle: {
               color: 'white',
-              fontSize: this.isBigShow?18:12,
+              fontSize: this.isBigShow ? 18 : 12,
               fontFamily: "hemi",
             },
           },
@@ -90,7 +90,7 @@ export default {
             },
             textStyle: {
               color: 'white',
-              fontSize: this.isBigShow?18:12,
+              fontSize: this.isBigShow ? 18 : 12,
               fontFamily: "hemi",
             },
 
@@ -131,7 +131,7 @@ export default {
               show: true,
               textStyle: {
                 color: '#ffffff',
-                fontSize: this.isBigShow?18:12,
+                fontSize: this.isBigShow ? 18 : 12,
                 fontFamily: "hemi",
               }
             },
@@ -176,9 +176,9 @@ export default {
         ],
         series: [{
             type: 'bar',
-             xAxisIndex: 0,
+            xAxisIndex: 0,
             yAxisIndex: 0,
-            barWidth: this.isBigShow?16:8, //左边柱状图大小
+            barWidth: this.isBigShow ? 16 : 7, //左边柱状图大小
             name: '男性年龄',
             label: {
               normal: {
@@ -190,25 +190,25 @@ export default {
                 // barBorderRadius: 5,
                 color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
                     offset: 0,
-                    color: 'rgba(99, 160, 247, 0.8)'
+                    color: '#69a5f9'
                   },
                   {
                     offset: 0.5,
-                    color: '#425a7f'
+                    color: 'rgba(168, 204, 255,0.6)'
                   },
                   {
                     offset: 1,
-                    color: '#2a3b5b'
+                    color: 'rgba(179, 211, 253,0.1)'
                   }
                 ])
               }
             },
             data: data1,
-          
+
           },
           {
             type: 'bar',
-            barWidth: this.isBigShow?16:8,
+            barWidth: this.isBigShow ? 16 : 7,
             xAxisIndex: 2,
             yAxisIndex: 2,
             name: '女性年龄',
@@ -222,16 +222,16 @@ export default {
                 // barBorderRadius: 5,
                 color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
                     offset: 0,
-                    color: 'rgba(21, 61, 67, 0.8)'
+                    color: 'rgba(213, 251, 231, 0.1)'
                   },
                   {
                     offset: 0.5,
-                    color: '#296e5d'
+                    color: 'rgba(156, 239, 200,0.6)'
                   },
-                  
+
                   {
                     offset: 1,
-                    color: 'rgba(86, 225, 154, 0.8)'
+                    color: '#60eda4'
                   }
                 ])
               }
@@ -241,9 +241,220 @@ export default {
         ],
       };
       // echarts.dispose(document.getElemsentById('ageChart')); // 销毁之前的实例
-      this.agechart = echarts.init(document.getElementById('ageChart'), null, {devicePixelRatio: 2.5}); // 重新创建新的实例
+      this.agechart = echarts.init(document.getElementById('ageChart'), null, {
+        devicePixelRatio: 2.5
+      }); // 重新创建新的实例
       this.agechart.setOption(option);
-    }
+    },
+    
+    peopleChartShow() {
+      let category = [{
+        name: "展厅",
+        value: "50"
+      },
+      {
+        name: "会议室",
+        value: "25"
+      },
+      {
+        name: "其他",
+        value: "25"
+      }]; // 类别
+      let total = 100; // 数据总数
+      var datas = [];
+      category.forEach(value => {
+        datas.push(value.value);
+      });
+      let option = {
+        backgroundColor: "",
+        grid: {
+          left: '20%',
+          top: '10%', // 设置条形图的边距
+          right: '20%',
+          bottom: '10%',
+        },
+        xAxis: {
+          max: total,
+          show: false,
+        },
+        yAxis: [
+          {
+              //名称
+              type: 'category',
+              inverse: true,
+              axisTick: 'none',
+              axisLine: 'none',
+              show: true,
+              axisLabel: {
+                  textStyle: {
+                      color: '#C8EFFD',
+                  },
+                  formatter: (val, i) => {
+                      return `{num|}{name|${val}}`;
+                  },
+                  rich: {
+                      num: {
+                          width: 16,
+                          fontSize: this.isBigShow?22:12,
+                         
+                          fontFamily:'ysbth'
+                      },
+                      name: {
+                          width: 60,//进度条名称宽度 
+                          fontSize: this.isBigShow?22:12,
+                       
+                          fontFamily:'ysbth'
+                      },
+                  },
+              },
+              data: ['展厅','会议室','其他'],//进度条名称
+          },
+          {
+              type: 'category',
+              inverse: true,
+              axisTick: 'none',
+              axisLine: 'none',
+              show: true,
+              axisLabel: {
+                  textStyle: {
+                      color: '#C8EFFD',
+                      fontSize: this.isBigShow?33:16,
+                      fontFamily:'hemi'
+                  },
+                  formatter: (val) => {
+                      return `{num|${val}}{unit| %}`;
+                  },
+                  rich: {
+                      num: {
+                        fontSize: this.isBigShow?33:16,
+                          fontFamily:'hemi'
+                      },
+                      unit: {
+                        fontSize: this.isBigShow?33:16,
+                      },
+                  },
+              },
+              data: [50,25,25],//进度条数值
+          },
+      ],
+        series: [{
+            // 内
+            type: "bar",
+            barWidth: this.isBigShow?20:10,
+            legendHoverLink: false,
+            silent: true,
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  var color;
+                  if (params.dataIndex == 19) {
+                    color = {
+                      type: "linear",
+                      x: 0,
+                      y: 0,
+                      x2: 1,
+                      y2: 0,
+                      colorStops: [{
+                          offset: 0,
+                          color: "#EB5118" // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: "#F21F02" // 100% 处的颜色
+                        }
+                      ]
+                    }
+                  } else if (params.dataIndex == 18) {
+                    color = {
+                      type: "linear",
+                      x: 0,
+                      y: 0,
+                      x2: 1,
+                      y2: 0,
+                      colorStops: [{
+                          offset: 0,
+                          color: "#FFA048" // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: "#B25E14" // 100% 处的颜色
+                        }
+                      ]
+                    }
+                  } else if (params.dataIndex == 17) {
+                    color = {
+                      type: "linear",
+                      x: 0,
+                      y: 0,
+                      x2: 1,
+                      y2: 0,
+                      colorStops: [{
+                          offset: 0,
+                          color: "#F8E972" // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: "#5aeb9f" // 100% 处的颜色
+                        }
+                      ]
+                    }
+                  } else {
+                    color = {
+                      type: "linear",
+                      x: 0,
+                      y: 0,
+                      x2: 1,
+                      y2: 0,
+                      colorStops: [{
+                          offset: 0,
+                          color: "rgba(21, 56, 65,0.2)" // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: "rgba(40, 110, 93,0.8)" // 100% 处的颜色
+                        }
+                      ]
+                    }
+                  }
+                  return color;
+                },
+              }
+            },
+            data: category,
+            z: 1,
+            animationEasing: "elasticOut"
+          },
+        
+        //   {
+        //     // 分隔
+        //     type: 'pictorialBar',
+        //     symbolRotate: '-15',//倾斜度
+        //     itemStyle: {
+        //         normal: {
+        //             color: '#297260',
+        //         },
+        //     },
+        //     symbolRepeat: 'fixed',
+        //     symbolMargin: 5,//分割线间隔
+        //     symbol: 'rect',
+        //     symbolClip: true,
+        //     symbolSize: [2, 9],
+        //     symbolPosition: "start",
+        //     symbolOffset: [0, -1],
+        //     data: category,
+        //     z: 2,
+        //     animationEasing: 'elasticOut',
+        // },
+        
+         
+        ]
+      };
+      this.peopleChart = echarts.init(document.getElementById('peopleChart'), null, {
+        devicePixelRatio: 2.5
+      }); // 重新创建新的实例
+      this.peopleChart.setOption(option);
+    },
+  
   }
 
 

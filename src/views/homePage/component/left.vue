@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-09 15:38:27
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-10 21:09:02
+ * @LastEditTime: 2022-10-11 20:49:32
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\homePage\component\left.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -58,7 +58,84 @@
       <div class="ageChart">
         <div id="ageChart"></div>
       </div>
+      <!-- 人流分布 -->
+      <div class="age">
+        <div class='round'></div>
+        <span>人流分布</span>
+      </div>
+      <div class="people">
+        <img src="../../../assets/images/homepage/map.png" alt="">
+        <div id="peopleChart"> </div>
+      </div>
+
     </section>
+    <TitleCom>
+      <p>空间总况<span>Air Quality</span></p>
+    </TitleCom>
+    <div class="airQuality" v-if="isBigShow">
+      <span class="airQualityspan1">空气质量指标</span>
+      <span style="margin-left:2%">优：</span>
+      <div class="airQualitycolor" style="background:#5ffd8f"></div>
+      <span>良：</span>
+      <div class="airQualitycolor" style="background:#feff0c"></div>
+      <span>轻度污染：</span>
+      <div class="airQualitycolor" style="background:#ff760b"></div>
+      <span>中度污染：</span>
+      <div class="airQualitycolor" style="background:#fb0400"></div>
+      <span>重度污染：</span>
+      <div class="airQualitycolor" style="background:#9f014e"></div>
+      <span>严重污染：</span>
+      <div class="airQualitycolor" style="background:#740415"></div>
+    </div>
+    <div class="airQuality" v-if="!isBigShow">
+      <div class="airQualityspan1 airQualityspan1small">空气质量指标</div>
+      <!-- <span style="margin-left:2%">优：</span> -->
+      <div class="airQualitycolor airQualitycolorsmall" style="background:#5ffd8f"></div>
+      <!-- <span>良：</span> -->
+      <div class="airQualitycolor airQualitycolorsmall" style="background:#feff0c;margin-left: 12px;"></div>
+      <!-- <span>轻度污染：</span> -->
+      <div class="airQualitycolor airQualitycolorsmall" style="background:#ff760b;margin-left: 15px;"></div>
+      <!-- <span>中度污染：</span> -->
+      <div class="airQualitycolor airQualitycolorsmall" style="background:#fb0400;"></div>
+      <!-- <span>重度污染：</span> -->
+      <div class="airQualitycolor airQualitycolorsmall" style="background:#9f014e"></div>
+      <!-- <span>严重污染：</span> -->
+      <div class="airQualitycolor airQualitycolorsmall" style="background:#740415"></div>
+    </div>
+    <div class="airQuality" v-if="!isBigShow">
+      <span style="margin-left:25%"> 优 </span>
+      <span style="margin-left:6%"> 良 </span>
+      <span style="margin-left:5%"> 轻度污染 </span>
+      <span style="margin-left:2%"> 中度污染 </span>
+      <span style="margin-left:2%"> 重度污染 </span>
+      <span style="margin-left:2%"> 严重污染 </span>
+    </div>
+    <div class="airQuality">
+      <span class="airQualityspan1">温湿度指标</span>
+      <div class="indicators" style="background:#42ccff"></div>
+      <div class="indicators" style="background:#62e389;margin-left: 6px;"></div>
+      <div class="indicators" style="background:#eaa500;margin-left: 6px;"></div>
+    </div>
+    <!-- 空气指标 -->
+    <div class="air" style="margin-top:5%">
+
+    </div>
+    <span class="airspan">空间湿度</span>
+    <div class="air">
+
+    </div>
+    <span class="airspan">空间温度</span>
+    <div class="air">
+
+    </div>
+    <span class="airspan">二氧化碳</span>
+    <div class="air">
+
+    </div>
+    <span class="airspan">tvoc</span>
+    <div class="airspan">AM
+      <span v-for="(item,index) in amarr" :key="index">{{item}}</span>
+    </div>
 
   </div>
 </template>
@@ -69,27 +146,32 @@ import ageChartNixins from "@/mixins/ageChart";
 
 export default {
   components: { TitleCom, TitleDetail },
-  mixins:[ageChartNixins],
+  mixins: [ageChartNixins],
   data() {
     return {
-      agechart: null
+      agechart: null,
+      peopleChart: null,
+      amarr: ['0','01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     }
   },
   created() {
     this.$nextTick(() => {
       this.ageChartShow()
+      this.peopleChartShow()//进度条
     })
 
   },
   methods: {
-    
+
   },
   beforeDestroy() {
-    if (!this.agechart) {
+    if (!this.agechart || !this.peopleChart) {
       return
     }
     this.agechart.dispose()
     this.agechart = null
+    this.peopleChart.dispose()
+    this.peopleChart = null
   },
 }
 </script>
@@ -100,7 +182,7 @@ section {
 }
 .Statistics {
   width: 100%;
-  height: 6.16vh;
+  height: 6.16%;
   margin-top: 2vh;
   display: flex;
 
@@ -132,6 +214,7 @@ section {
     transform: scale(0.5);
   }
 }
+
 @media screen and (width: 3840px) {
   .Statisticsdiv {
     width: 48%;

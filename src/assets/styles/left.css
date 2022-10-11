@@ -1,6 +1,6 @@
 .reception {
   width: 100%;
-  height: 7.59vh;
+  height: 7.59%;
   display: flex;
   margin-top: 3%;
   position: relative;
@@ -56,7 +56,7 @@
 }
 .ageChart{
     width: 100%;
-    height: 300px;
+    height:198px;
 }
 #ageChart{
     width: 100%;
@@ -68,21 +68,63 @@
     margin-top: 15px;
     background-color: #7ad5ff;
     border-radius: 50%;
-    animation: breathe 1000ms ease infinite;
+    box-shadow: 0 1px 10px #73eeab;
   }
-  
-  @-webkit-keyframes breathe {
-    0% {
-      box-shadow: 0 1px 10px #73eeab;
-    }
-    50% {
-      box-shadow: 0 1px 15px #06e76c;
-    }
-    100% {
-      box-shadow: 0 1px 20px #81e7b1;
-    }
-  
+  .people{
+    width: 95%;
+    height:83px;
+    margin: auto;
+   display: flex;
+   margin-top: 2%;
+   
   }
+  .people>img{
+    width: 25%;
+    height:100%;
+  }
+#peopleChart{
+  width: 75%;
+  height:100%;
+
+}
+/* 空气指标 */
+.airQuality{
+margin-left: 6%;
+font-family: "ysbth";
+color: white;
+margin-top: 2%;
+display: flex;
+}
+.airQualitycolor{
+  width:14px;
+  height: 5px;
+  margin: 3px 10px 0 3px;
+}
+.airQualitycolorsmall{
+  margin: 5px 10px 0 30px;
+}
+.indicators{
+  width: 25.5%;
+  height: 5px;
+  margin-top: 5px;
+  margin-left:2%
+}
+/* 空气指标 */
+.air{
+  margin-left: 6%;
+  width:90%;
+  height: 20px;
+  background: #0f2855;
+}
+.airspan{
+  font-size: 12px;
+  font-family: "ysbth";
+color: #C8EFFD;
+margin-left: 6%;
+}
+.airspan>span{
+  padding: 1.45%;
+}
 @media screen and (width: 3840px) {
     .round {
         height:15px;
@@ -110,23 +152,55 @@
 .receptionspan2{
     right: 19%;
 }
-@-webkit-keyframes breathe {
-    0% {
-      opacity: 0.2;
-      box-shadow: 0 1px 15px #c9f0da;
-    }
-    100% {
-      opacity: 1;
-      box-shadow: 0 1px 40px #7de9ad;
-    }
-    50% {
-      opacity: 1;
-      box-shadow: 0 1px 20px #65eaa1;
-    }
-  }
+
   .age>span{
 
     font-size:22px;
+}
+.ageChart{
+  width: 100%;
+  height:395px;
+}
+.people{
+  height:166px;
+
+}
+.people>img{
+  width: 153px;
+  height: 166px;
+}
+/* 空气状况 */
+.airQuality{
+
+  margin-top: 3%;
+  }
+.airQualityspan1{
+  font-size: 14px;
+}
+.airQualityspan1small{
+  text-align: center;
+}
+.airQualitycolor{
+  width: 29px;
+  height: 10px;
+}
+.indicators{
+  width: 27%;
+  height: 10px;
+  margin-top: 4px;
+}
+/* 空气指标 */
+.air{
+  height: 40px;
+}
+.airspan{
+  font-size: 22px;
+}
+.airspan>span{
+  padding: 1.5%;
+}
+.airspan>span:nth-child(1){
+ margin-left: 27px;
 }
 
 }

@@ -1,27 +1,27 @@
 <template>
-    <div>
-        <footer>
-        <!-- 左边 -->
-        <div>
-          <img class="footerimg" src="../../../assets/images/homepage/location.png" alt="">
-          <p class="location">{{city}}</p>
-          <img class="duoyunimg" src="../../../assets/images/homepage/duoyun.png" alt="">
-          <p class="wd" v-show="tem1">{{tem1}} ℃ ~ {{tem2}} ℃</p>
-          <p class="week">{{wea}} {{week}}</p>
-        </div>
-        <!-- 右边 -->
-        <div>
-          <span class="nowYear">{{nowYear}}</span>
-          <span class="timeNow">{{timeNow}}</span>
-        </div>
-      </footer>
-    </div>
+  <div>
+    <footer>
+      <!-- 左边 -->
+      <div>
+        <img class="footerimg" src="../../../assets/images/homepage/location.png" alt="">
+        <p class="location">{{city}}</p>
+        <img class="duoyunimg" src="../../../assets/images/homepage/duoyun.png" alt="">
+        <p class="wd" v-show="tem1">{{tem1}} ℃ ~ {{tem2}} ℃</p>
+        <p class="week">{{wea}} {{week}}</p>
+      </div>
+      <!-- 右边 -->
+      <div>
+        <span class="nowYear">{{nowYear}}</span>
+        <span class="timeNow">{{timeNow}}</span>
+      </div>
+    </footer>
+  </div>
 </template>
 <script>
 import axios from "axios";
 import timeFormat from "@/utils/time.js";
 export default {
-    data() {
+  data() {
     return {
       city: '深圳市',
       tem2: "17",
@@ -44,11 +44,15 @@ export default {
       const res = await axios.get(
         "https://yiketianqi.com/api?unescape=1&version=v6&appid=69659768&appsecret=Q3W20NSX"
       );
-      this.city = res.data.city
-      this.tem1 = res.data.tem1
-      this.tem2 = res.data.tem2
-      this.wea = res.data.wea
-      this.week = res.data.week
+      if (res.data) {
+        this.city = res.data.city
+        this.tem1 = res.data.tem1
+        this.tem2 = res.data.tem2
+        this.wea = res.data.wea
+        this.week = res.data.week
+
+      }
+
     },
     nowTimeAndDate() {
       //获取当前时间 日期 
@@ -96,7 +100,7 @@ footer > div:nth-child(1) {
 }
 .wd {
   font-size: 15px;
-  font-family: 'hemi';
+  font-family: "hemi";
 }
 .week {
   font-size: 14px;
@@ -110,27 +114,23 @@ footer > div:nth-child(2) {
   right: 1.38%;
   width: 21%;
   height: 5%;
-  font-family: 'hemi';
+  font-family: "hemi";
   color: white;
   letter-spacing: 4px;
- 
 }
-.nowYear{
-    position: relative;
-    left: 30%;
-    top: 16%;
-    font-size: 15px;
-  
- }
- .timeNow{
-    position: relative;
-    left: 35%;
-    top: 16%;
-    font-size: 24px;
-
- }
+.nowYear {
+  position: relative;
+  left: 30%;
+  top: 16%;
+  font-size: 15px;
+}
+.timeNow {
+  position: relative;
+  left: 35%;
+  top: 16%;
+  font-size: 24px;
+}
 @media screen and (width: 3840px) {
-
   .location {
     font-size: 32px;
     margin-left: 16px;
@@ -152,19 +152,17 @@ footer > div:nth-child(2) {
   .week {
     font-size: 24px;
   }
- .nowYear{
+  .nowYear {
     position: relative;
     left: 40%;
     top: 16%;
     font-size: 30px;
- }
- .timeNow{
+  }
+  .timeNow {
     position: relative;
     left: 46%;
     font-size: 48px;
     top: 16%;
-
- }
+  }
 }
-
 </style>

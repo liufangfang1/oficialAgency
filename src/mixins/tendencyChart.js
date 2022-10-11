@@ -12,10 +12,8 @@ export default {
     }
   },
   methods: {
-   
+//    能耗
     tendencyChartShow() {
-   
-
       let xData = ["01", "02", "03", "04"];
       let legendData = ["去年耗电量", "今年耗电量"]; //图例
       let firstIndustry = [72, 37, 4, 75]; //第一产业
@@ -27,10 +25,10 @@ export default {
               y: 0,
               x2: 0,
               y2: 0,
-              top: '15%',
-              left: '3%',
+              top: '25%',
+              left: '5%',
               right: '3%',
-              bottom: '20%',
+              bottom: '0%',
               containLabel: true,
           },
           tooltip: {
@@ -43,7 +41,8 @@ export default {
               }
           },
           legend: {
-              top: '2%',
+              top: '3%',
+              right:'2%',
               padding: [10, 0, 0, 0],
               data: legendData,
               //图例滚动
@@ -196,9 +195,186 @@ export default {
           ]
       };
       // echarts.dispose(document.getElemsentById('ageChart')); // 销毁之前的实例
-      this.agechart = echarts.init(document.getElementById('tendency'), null, {devicePixelRatio: 2.5}); // 重新创建新的实例
-      this.agechart.setOption(option);
-    }
+      this.tendencyChart = echarts.init(document.getElementById('tendency'), null, {devicePixelRatio: 2.5}); // 重新创建新的实例
+      this.tendencyChart.setOption(option);
+    },
+    // 灯光照明
+    equipmentChar1(){
+      var  option = {
+            color: ['#61fc91', '#5d8ab9'],
+            series: [
+                {
+                    name: '',
+                    type: 'pie',
+                    radius: '95%',
+                    center: ['50%', '50%'],
+                    itemStyle: {
+                        normal: {
+                            labelLine: {
+                                show: false,
+                            },
+                            color:'rgba(188, 218, 246,0.5)',
+                        },
+                    },
+                    data: [
+                        {
+                            name: '',
+                            value: 0,
+                        },
+                    ],
+                },
+                {
+                    name: '告警',
+                    type: 'pie',
+                    radius: '65%',
+                    center: ['50%', '50%'],
+                    data: [
+                        { value: 10, name: '信息中心机房' },
+                        { value: 5, name: '数据中心机房' },
+                    ],
+                    label:{
+                        show:false,
+                   },
+                   
+                },
+            ],
+        };
+        this.equipmentchart1 = echarts.init(document.getElementById('equipment1'), null, {devicePixelRatio: 2.5}); // 重新创建新的实例
+        this.equipmentchart1.setOption(option);
+    },
+     // 空调新风
+     equipmentChar2(){
+        var  option = {
+              color: ['#61fc91', '#5d8ab9'],
+              series: [
+                  {
+                      name: '',
+                      type: 'pie',
+                      radius: '95%',
+                      center: ['50%', '50%'],
+                      itemStyle: {
+                          normal: {
+                              labelLine: {
+                                  show: false,
+                              },
+                              color:'rgba(188, 218, 246,0.5)',
+                          },
+                      },
+                      data: [
+                          {
+                              name: '',
+                              value: 0,
+                          },
+                      ],
+                  },
+                  {
+                      name: '告警',
+                      type: 'pie',
+                      radius: '65%',
+                      center: ['50%', '50%'],
+                      data: [
+                          { value: 10, name: '信息中心机房' },
+                          { value: 5, name: '数据中心机房' },
+                      ],
+                      label:{
+                          show:false,
+                     },
+                     
+                  },
+              ],
+          };
+          this.equipmentchart2 = echarts.init(document.getElementById('equipment2'), null, {devicePixelRatio: 2.5}); // 重新创建新的实例
+          this.equipmentchart2.setOption(option);
+      },
+       // 展示设备
+     equipmentChar3(){
+        var  option = {
+              color: ['#61fc91', '#5d8ab9'],
+              series: [
+                  {
+                      name: '',
+                      type: 'pie',
+                      radius: '95%',
+                      center: ['50%', '50%'],
+                      itemStyle: {
+                          normal: {
+                              labelLine: {
+                                  show: false,
+                              },
+                              color:'rgba(188, 218, 246,0.5)',
+                          },
+                      },
+                      data: [
+                          {
+                              name: '',
+                              value: 0,
+                          },
+                      ],
+                  },
+                  {
+                      name: '告警',
+                      type: 'pie',
+                      radius: '65%',
+                      center: ['50%', '50%'],
+                      data: [
+                          { value: 10, name: '信息中心机房' },
+                          { value: 5, name: '数据中心机房' },
+                      ],
+                      label:{
+                          show:false,
+                     },
+                     
+                  },
+              ],
+          };
+          this.equipmentchart3 = echarts.init(document.getElementById('equipment3'), null, {devicePixelRatio: 2.5}); // 重新创建新的实例
+          this.equipmentchart3.setOption(option);
+      },
+        // 其他设备
+     equipmentChar4(){
+        var  option = {
+              color: ['#61fc91', '#5d8ab9'],
+              series: [
+                  {
+                      name: '',
+                      type: 'pie',
+                      radius: '95%',
+                      center: ['50%', '50%'],
+                      itemStyle: {
+                          normal: {
+                              labelLine: {
+                                  show: false,
+                              },
+                              color:'rgba(188, 218, 246,0.5)',
+                          },
+                      },
+                      data: [
+                          {
+                              name: '',
+                              value: 0,
+                          },
+                      ],
+                  },
+                  {
+                      name: '告警',
+                      type: 'pie',
+                      radius: '65%',
+                      center: ['50%', '50%'],
+                      data: [
+                          { value: 10, name: '信息中心机房' },
+                          { value: 5, name: '数据中心机房' },
+                      ],
+                      label:{
+                          show:false,
+                     },
+                     
+                  },
+              ],
+          };
+          this.equipmentchart4 = echarts.init(document.getElementById('equipment4'), null, {devicePixelRatio: 2.5}); // 重新创建新的实例
+          this.equipmentchart4.setOption(option);
+      }
+
   }
 
 

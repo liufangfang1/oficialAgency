@@ -7,12 +7,13 @@
       <header class="animate__animated animate__bounceInDown">
         工务署智慧展馆综合管理平台
       </header>
-      <!-- 左右区域 -->
+      <!-- 左右区域 animate__animated animate__bounceInLeft-->
       <div class="content">
-        <div class="left animate__animated animate__bounceInLeft">
+        <div class="left ">
           <LeftCom> </LeftCom>
         </div>
-        <div class="right animate__animated animate__bounceInRight">
+        <!-- animate__animated animate__bounceInRight -->
+        <div class="right ">
           <RightCom></RightCom>
         </div>
       </div>
@@ -103,8 +104,7 @@ header {
   width: 21%;
   height: 87.7%;
   /* background: yellow; */
-  animate-delay: 1s;
-  animate-duration: 2s;
+
   background-image: url("../../assets/images/homepage/leftborder.png");
   background-size: 100% 100%;
 }
@@ -134,7 +134,7 @@ header {
     // background-image: url("../../assets/images/homepage/butbg.png");
     background-size: 100% 100%;
     text-align: center;
-    line-height: 17%;
+    line-height: 2%;
     letter-spacing: 3px;
   }
 }
