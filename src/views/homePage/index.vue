@@ -19,7 +19,7 @@
       </div>
       <!-- 中部按钮 -->
       <div class="centerBottom animate__animated animate__bounceInUp">
-        <div v-for="(item,index) in tab" :key="index" :class="currentIndex==index?'active_bgimg ':'bgimg'" @click="handleClick(item,index)">
+        <div v-for="(item,index) in tab" :key="index" :class="currentIndex==index?'active_bgimg ':'bgimg'" @click="handleTabClick(item,index)">
           <p>{{item}}</p>
         </div>
 
@@ -39,11 +39,12 @@
 import CenterCom from './component/center.vue'
 import LeftCom from './component/left.vue'
 import RightCom from './component/right.vue'
-import FooterCom from './component/footer.vue'
-
+import FooterCom from '../component/footer.vue'
+import tabClickMixins from "@/mixins/tabClick";
 export default {
   name: "",
   components: { CenterCom, LeftCom, RightCom, FooterCom },
+  mixins: [tabClickMixins],
   data() {
     return {
       currentIndex:0,
@@ -51,9 +52,7 @@ export default {
     }
   },
   methods:{
-    handleClick(item,index){
-      this.currentIndex=index
-    }
+  
   }
 
 
@@ -136,6 +135,7 @@ header {
     text-align: center;
     line-height: 2%;
     letter-spacing: 3px;
+    cursor: pointer;
   }
 }
 .bgimg{

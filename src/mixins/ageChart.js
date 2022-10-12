@@ -5,186 +5,472 @@ export default {
       isBigShow: true //判断是否是3840
     }
   },
-  mounted() {
+  created() {
     this.isBigShow = document.body.clientHeight > 1080 ? true : false
+  },
+  mounted() {
+
     window.onresize = () => {
       this.isBigShow = document.body.clientHeight > 1080 ? true : false
     }
   },
   methods: {
 
+    // ageChartShow() {
+    //   let yAxisData = ['>60', '50-60', '41-50', '31-40', '21-30', '<20'];
+    //   // let data1 = [5, 19, 23, 43, 34, 53];
+    //   let data1 = [53, 34, 43, 23, 19, 5];
+    //   let data2 = [5, 12, 10, 7, 32, 40];
+
+    //   var option = {
+    //     tooltip: {
+    //       show: true,
+    //       trigger: 'axis',
+    //       axisPointer: {
+    //         type: 'shadow'
+    //       }
+    //     },
+    //     backgroundColor: '',
+    //     legend: {
+    //       show: false
+    //     },
+    //     grid: [{
+    //       show: false,
+    //       left: '5%',
+    //       top: '2%',
+    //       width: '45%',
+    //       containLabel: true,
+    //       bottom: '8%'
+    //     }, {
+    //       show: false,
+    //       left: '6%',
+    //       top: '2%',
+    //       bottom: '11%',
+    //       width: '0%',
+    //     }, {
+    //       show: false,
+    //       right: '2%',
+    //       top: '2%',
+    //       bottom: '8%',
+    //       containLabel: true,
+    //       width: '45%'
+    //     }],
+    //     xAxis: [{
+    //       type: 'value',
+    //       inverse: true,
+    //       position: 'bottom',
+    //       axisLabel: {
+    //         show: true,
+    //         formatter: function (value,index) {
+    //           if(index%2==0){
+    //             return value + '%'
+    //           }
+
+    //         },
+    //         textStyle: {
+    //           color: 'white',
+    //           fontSize: this.isBigShow ? 18 : 12,
+    //           fontFamily: "hemi",
+    //         },
+    //       },
+    //       axisLine: {
+    //         show: false
+    //       },
+    //       axisTick: {
+    //         show: false
+    //       },
+    //       splitLine: {
+    //         show: false
+    //       }
+    //     }, {
+    //       gridIndex: 1,
+    //       show: false,
+
+    //     }, { //横坐标字体颜色
+    //       gridIndex: 2,
+    //       type: 'value',
+    //       axisLabel: {
+    //         show: true,
+    //         formatter: function (value,index) {
+    //           if(index%2==0){
+    //             return value + '%'
+    //           }
+    //         },
+    //         textStyle: {
+    //           color: 'white',
+    //           fontSize: this.isBigShow ? 18 : 12,
+    //           fontFamily: "hemi",
+    //         },
+
+    //         interval: 0,
+    //       },
+    //       axisLine: {
+    //         show: false
+    //       },
+    //       axisTick: {
+    //         show: false
+    //       },
+    //       splitLine: {
+    //         show: false
+    //       }
+    //     }],
+    //     yAxis: [{
+    //         type: 'category',
+    //         inverse: true,
+    //         position: 'right',
+    //         axisLabel: {
+    //           show: false
+    //         },
+    //         axisLine: { //中间分界线
+    //           show: false,
+
+    //         },
+    //         axisTick: {
+    //           show: false
+    //         },
+    //         data: yAxisData
+    //       },
+    //       {
+    //         type: 'category',
+    //         inverse: true,
+    //         gridIndex: 1,
+    //         position: 'left',
+    //         axisLabel: { //y轴字体样式
+    //           show: true,
+    //           textStyle: {
+    //             color: '#ffffff',
+    //             fontSize: this.isBigShow ? 18 : 12,
+    //             fontFamily: "hemi",
+    //           }
+    //         },
+    //         axisLine: {
+    //           show: false,
+    //           lineStyle: {
+    //             color: '#979797'
+    //           }
+    //         },
+    //         axisTick: {
+    //           show: false
+    //         },
+    //         // data: yAxisData
+    //         data: yAxisData.map(function (value) {
+    //           return {
+    //             value: value,
+    //             textStyle: {
+    //               align: 'center'
+    //             }
+    //           }
+    //         })
+    //       },
+    //       {
+    //         type: 'category',
+    //         inverse: false,
+    //         gridIndex: 2,
+    //         position: 'left',
+    //         axisLabel: {
+    //           show: false
+    //         },
+    //         axisLine: {
+    //           show: false, //右边柱状图线
+    //           lineStyle: {
+    //             color: '#979797'
+    //           }
+    //         },
+    //         axisTick: {
+    //           show: false
+    //         },
+    //         data: yAxisData
+    //       }
+    //     ],
+    //     series: [{
+    //         type: 'bar',
+    //         xAxisIndex: 0,
+    //         yAxisIndex: 0,
+    //         barWidth: this.isBigShow ? 16 : 7, //左边柱状图大小
+    //         name: '男性年龄',
+    //         label: {
+    //           normal: {
+    //             show: false,
+    //           },
+    //         },
+    //         itemStyle: {
+    //           normal: {
+    //             // barBorderRadius: 5,
+    //             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+    //                 offset: 0,
+    //                 color: '#69a5f9'
+    //               },
+    //               {
+    //                 offset: 0.5,
+    //                 color: 'rgba(168, 204, 255,0.6)'
+    //               },
+    //               {
+    //                 offset: 1,
+    //                 color: 'rgba(179, 211, 253,0.1)'
+    //               }
+    //             ])
+    //           }
+    //         },
+    //         data: data1,
+
+    //       },
+    //       {
+    //         type: 'bar',
+    //         barWidth: this.isBigShow ? 16 : 7,
+    //         xAxisIndex: 2,
+    //         yAxisIndex: 2,
+    //         name: '女性年龄',
+    //         label: {
+    //           normal: {
+    //             show: false,
+    //           },
+    //         },
+    //         itemStyle: {
+    //           normal: {
+    //             // barBorderRadius: 5,
+    //             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+    //                 offset: 0,
+    //                 color: 'rgba(213, 251, 231, 0.1)'
+    //               },
+    //               {
+    //                 offset: 0.5,
+    //                 color: 'rgba(156, 239, 200,0.6)'
+    //               },
+
+    //               {
+    //                 offset: 1,
+    //                 color: '#60eda4'
+    //               }
+    //             ])
+    //           }
+    //         },
+    //         data: data2
+    //       }
+    //     ],
+    //   };
+    //   // echarts.dispose(document.getElemsentById('ageChart')); // 销毁之前的实例
+    //   this.agechart = echarts.init(document.getElementById('ageChart'), null, {
+    //     devicePixelRatio: 2.5
+    //   }); // 重新创建新的实例
+    //   this.agechart.setOption(option);
+    // },
     ageChartShow() {
-      let yAxisData = ['>60', '50-60', '41-50', '31-40', '21-30', '<20'];
-      // let data1 = [5, 19, 23, 43, 34, 53];
-      let data1 = [53, 34, 43, 23, 19, 5];
-      let data2 = [5, 12, 10, 7, 32, 40];
+      var myData = ['>60', '50-60', '41-50', '31-40', '21-30', '<20']
+      var lineData = [100, 100, 100, 100, 100, 100]
+      var lastYearData = {
+        1: [3, 20, 62, 34, 55, 65]//从小到大
+      }
+      var thisYearData = {
+        1: [66, 66, 39, 23,20, 11]//从大到小
+      }
+      var timeLineData = [1]
 
-      var option = {
-        tooltip: {
-          show: true,
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow'
-          }
-        },
-        backgroundColor: '',
-        legend: {
-          show: false
-        },
-        grid: [{
-          show: false,
-          left: '5%',
-          top: '2%',
-          width: '45%',
-          containLabel: true,
-          bottom: '8%'
-        }, {
-          show: false,
-          left: '6%',
-          top: '2%',
-          bottom: '11%',
-          width: '0%',
-        }, {
-          show: false,
-          right: '2%',
-          top: '2%',
-          bottom: '8%',
-          containLabel: true,
-          width: '45%'
-        }],
-        xAxis: [{
-          type: 'value',
-          inverse: true,
-          position: 'bottom',
-          axisLabel: {
-            show: true,
-            formatter: function (value) {
-              return value + '%'
-            },
-            textStyle: {
-              color: 'white',
-              fontSize: this.isBigShow ? 18 : 12,
-              fontFamily: "hemi",
-            },
+      let option = {
+        baseOption: {
+          timeline: {
+            show: false,
+            top: 0,
+            data: []
           },
-          axisLine: {
-            show: false
-          },
-          axisTick: {
-            show: false
-          },
-          splitLine: {
-            show: false
-          }
-        }, {
-          gridIndex: 1,
-          show: false,
 
-        }, { //横坐标字体颜色
-          gridIndex: 2,
-          type: 'value',
-          axisLabel: {
-            show: true,
-            formatter: function (value) {
-              return value + '%'
-            },
-            textStyle: {
-              color: 'white',
-              fontSize: this.isBigShow ? 18 : 12,
-              fontFamily: "hemi",
-            },
-
-            interval: 0,
-          },
-          axisLine: {
-            show: false
-          },
-          axisTick: {
-            show: false
-          },
-          splitLine: {
-            show: false
-          }
-        }],
-        yAxis: [{
-            type: 'category',
+          grid: [{
+            show: false,
+            left: '4%',
+            top: '0%',
+            bottom: '8%',
+            containLabel: true,
+            width: '40%'
+          }, {
+            show: false,
+            left: '51%',
+            top: '0%',
+            bottom: '20%',
+            width: '0%'
+          }, {
+            show: false,
+            right: '5%',
+            top: '0%',
+            bottom: '8%',
+            containLabel: true,
+            width: '40%'
+          }],
+          xAxis: [{
+            type: 'value',
             inverse: true,
-            position: 'right',
-            axisLabel: {
+            axisLine: {
               show: false
-            },
-            axisLine: { //中间分界线
-              show: false,
-
             },
             axisTick: {
               show: false
             },
-            data: yAxisData
-          },
-          {
-            type: 'category',
-            inverse: true,
-            gridIndex: 1,
-            position: 'left',
-            axisLabel: { //y轴字体样式
+            position: 'bottom',
+            axisLabel: {
               show: true,
-              textStyle: {
-                color: '#ffffff',
+              formatter: function (value) {
+                //return '\n\n\n\n' + value;
+                // return '\n' + value
+                return value + '%'
+                // return value + 'virus'
+                // return value.split("").join("\n");  
+              },
+              textStyle: { //x坐标样式
+                color: 'white',
                 fontSize: this.isBigShow ? 18 : 12,
                 fontFamily: "hemi",
-              }
+              },
             },
-            axisLine: {
-              show: false,
-              lineStyle: {
-                color: '#979797'
-              }
-            },
-            axisTick: {
+            splitLine: {
               show: false
-            },
-            // data: yAxisData
-            data: yAxisData.map(function (value) {
-              return {
-                value: value,
-                textStyle: {
-                  align: 'center'
-                }
-              }
-            })
-          },
-          {
-            type: 'category',
-            inverse: false,
+            }
+          }, {
+            gridIndex: 1,
+            show: false,
+          }, {
             gridIndex: 2,
-            position: 'left',
-            axisLabel: {
-              show: false
-            },
             axisLine: {
-              show: false, //右边柱状图线
-              lineStyle: {
-                color: '#979797'
-              }
+              show: false
             },
             axisTick: {
               show: false
             },
-            data: yAxisData
-          }
-        ],
-        series: [{
+            position: 'bottom',
+            axisLabel: {
+              show: true,
+              interval: 0,
+              formatter: function (value) {
+                //return '\n\n\n\n' + value;
+                //  return '\n' + value
+                return value + '%'
+                // return value + 'virus'
+                // return value.split("").join("\n");  
+              },
+              textStyle: { //x坐标样式
+                color: 'white',
+                fontSize: this.isBigShow ? 18 : 12,
+                fontFamily: "hemi",
+              },
+            },
+            splitLine: {
+              show: false
+            }
+          }],
+          yAxis: [{
+              type: 'category',
+              inverse: true,
+              position: 'right',
+              axisLabel: {
+                show: false
+              },
+              axisLine: { //中间分界线
+                show: false,
+
+              },
+              axisTick: {
+                show: false
+              },
+              data: myData
+            },
+            {
+              type: 'category',
+              inverse: true,
+              gridIndex: 1,
+              position: 'left',
+              axisLabel: { //y轴字体样式
+                show: true,
+                textStyle: {
+                  color: '#ffffff',
+                  fontSize: this.isBigShow ? 18 : 12,
+                  fontFamily: "hemi",
+                }
+              },
+              axisLine: {
+                show: false,
+                lineStyle: {
+                  color: '#979797'
+                }
+              },
+              axisTick: {
+                show: false
+              },
+              // data: yAxisData
+              data: myData.map(function (value) {
+                return {
+                  value: value,
+                  textStyle: {
+                    align: 'center'
+                  }
+                }
+              })
+            },
+            {
+              type: 'category',
+              inverse: false,
+              gridIndex: 2,
+              position: 'left',
+              axisLabel: {
+                show: false
+              },
+              axisLine: {
+                show: false, //右边柱状图线
+                lineStyle: {
+                  color: '#979797'
+                }
+              },
+              axisTick: {
+                show: false
+              },
+              data: myData
+            }
+          ],
+          series: []
+
+        },
+        options: []
+      }
+
+      option.baseOption.timeline.data.push(timeLineData[0])
+      option.options.push({
+        series: [{ //左边总数
+            type: 'pictorialBar',
+            xAxisIndex: 0,
+            yAxisIndex: 0,
+            // symbol: 'rect',
+            itemStyle: {
+              normal: {
+                color: 'rgba(0,0,0,0)'
+              }
+            },
+            barWidth: this.isBigShow ? 16 : 7, //左边柱状图大小
+
+            data: lineData,
+            barGap: '-100%',
+            barCategoryGap: 0,
+            label: {
+              normal: {
+                show: false, //控制是否显示左边百分比
+                formatter: (series) => {
+                  return lastYearData[timeLineData[0]][series.dataIndex] + '%'
+                },
+                position: 'insideTopLeft',
+                textStyle: {
+                  color: '#ffffff',
+                  fontSize: 20,
+                },
+                offset: [0, -10],
+              }
+            },
+            z: -100,
+            animationEasing: 'elasticOut',
+            animationDelay: function (dataIndex, params) {
+              return params.index * 30;
+            }
+          }, {
+            name: '男',
             type: 'bar',
             xAxisIndex: 0,
             yAxisIndex: 0,
+            //  symbol: 'rect',
             barWidth: this.isBigShow ? 16 : 7, //左边柱状图大小
-            name: '男性年龄',
-            label: {
-              normal: {
-                show: false,
-              },
-            },
             itemStyle: {
               normal: {
                 // barBorderRadius: 5,
@@ -203,20 +489,57 @@ export default {
                 ])
               }
             },
-            data: data1,
-
+            // symbolRepeat: true,
+            // symbolSize: 14,
+            data: lastYearData[timeLineData[0]],
+            // animationEasing: 'elasticOut',
+            // animationDelay: function (dataIndex, params) {
+            //     return params.index * 30 * 1.1;
+            // }
           },
-          {
-            type: 'bar',
-            barWidth: this.isBigShow ? 16 : 7,
+          { //右边柱状图总数
+            type: 'pictorialBar',
             xAxisIndex: 2,
             yAxisIndex: 2,
-            name: '女性年龄',
+            symbol: 'rect',
+            itemStyle: {
+              normal: {
+                color: 'rgba(0,0,0,0)'
+              }
+            },
+
+            barWidth: 10,
+            symbolRepeat: true,
+            symbolSize: 14,
+            data: lineData,
+            barGap: '-100%',
+            barCategoryGap: 0,
             label: {
               normal: {
-                show: false,
-              },
+                show: false, //控制是否显示百分比
+                formatter: (series) => {
+                  return thisYearData[timeLineData[0]][series.dataIndex] + '%'
+                },
+                position: 'insideTopRight',
+                textStyle: {
+                  color: '#ffffff',
+                  fontSize: 20,
+                },
+                offset: [0, -10],
+              }
             },
+            z: -100,
+            animationEasing: 'elasticOut',
+            animationDelay: function (dataIndex, params) {
+              return params.index * 30;
+            }
+          }, {
+            name: '女',
+            type: 'bar',
+            xAxisIndex: 2,
+            yAxisIndex: 2,
+            //   symbol: 'rect',
+            barWidth: this.isBigShow ? 16 : 7,
             itemStyle: {
               normal: {
                 // barBorderRadius: 5,
@@ -236,30 +559,36 @@ export default {
                 ])
               }
             },
-            data: data2
+            // symbolRepeat: true,
+            // symbolSize: 14,
+            data: thisYearData[timeLineData[0]],
+            // animationEasing: 'elasticOut',
+            // animationDelay: function (dataIndex, params) {
+            //     return params.index * 30 * 1.1;
+            // }
           }
-        ],
-      };
-      // echarts.dispose(document.getElemsentById('ageChart')); // 销毁之前的实例
+        ]
+      });
       this.agechart = echarts.init(document.getElementById('ageChart'), null, {
         devicePixelRatio: 2.5
       }); // 重新创建新的实例
       this.agechart.setOption(option);
     },
-    
+
     peopleChartShow() {
       let category = [{
-        name: "展厅",
-        value: "50"
-      },
-      {
-        name: "会议室",
-        value: "25"
-      },
-      {
-        name: "其他",
-        value: "25"
-      }]; // 类别
+          name: "展厅",
+          value: "50"
+        },
+        {
+          name: "会议室",
+          value: "25"
+        },
+        {
+          name: "其他",
+          value: "25"
+        }
+      ]; // 类别
       let total = 100; // 数据总数
       var datas = [];
       category.forEach(value => {
@@ -277,70 +606,69 @@ export default {
           max: total,
           show: false,
         },
-        yAxis: [
-          {
-              //名称
-              type: 'category',
-              inverse: true,
-              axisTick: 'none',
-              axisLine: 'none',
-              show: true,
-              axisLabel: {
-                  textStyle: {
-                      color: '#C8EFFD',
-                  },
-                  formatter: (val, i) => {
-                      return `{num|}{name|${val}}`;
-                  },
-                  rich: {
-                      num: {
-                          width: 16,
-                          fontSize: this.isBigShow?22:12,
-                         
-                          fontFamily:'ysbth'
-                      },
-                      name: {
-                          width: 60,//进度条名称宽度 
-                          fontSize: this.isBigShow?22:12,
-                       
-                          fontFamily:'ysbth'
-                      },
-                  },
+        yAxis: [{
+            //名称
+            type: 'category',
+            inverse: true,
+            axisTick: 'none',
+            axisLine: 'none',
+            show: true,
+            axisLabel: {
+              textStyle: {
+                color: '#C8EFFD',
               },
-              data: ['展厅','会议室','其他'],//进度条名称
+              formatter: (val, i) => {
+                return `{num|}{name|${val}}`;
+              },
+              rich: {
+                num: {
+                  width: 16,
+                  fontSize: this.isBigShow ? 22 : 12,
+
+                  fontFamily: 'ysbth'
+                },
+                name: {
+                  width: 60, //进度条名称宽度 
+                  fontSize: this.isBigShow ? 22 : 12,
+
+                  fontFamily: 'ysbth'
+                },
+              },
+            },
+            data: ['展厅', '会议室', '其他'], //进度条名称
           },
           {
-              type: 'category',
-              inverse: true,
-              axisTick: 'none',
-              axisLine: 'none',
-              show: true,
-              axisLabel: {
-                  textStyle: {
-                      color: '#C8EFFD',
-                      fontSize: this.isBigShow?33:16,
-                      fontFamily:'hemi'
-                  },
-                  formatter: (val) => {
-                      return `{num|${val}}{unit| %}`;
-                  },
-                  rich: {
-                      num: {
-                        fontSize: this.isBigShow?33:16,
-                          fontFamily:'hemi'
-                      },
-                      unit: {
-                        fontSize: this.isBigShow?33:16,
-                      },
-                  },
+            type: 'category',
+            inverse: true,
+            axisTick: 'none',
+            axisLine: 'none',
+            show: true,
+            axisLabel: {
+              textStyle: {
+                color: '#C8EFFD',
+                fontSize: this.isBigShow ? 33 : 16,
+                fontFamily: 'hemi'
               },
-              data: [50,25,25],//进度条数值
+              formatter: (val) => {
+                return `{num|${val}}{unit| %}`;
+              },
+              rich: {
+                num: {
+                  fontSize: this.isBigShow ? 33 : 16,
+                  fontFamily: 'hemi'
+                },
+                unit: {
+                  fontSize: this.isBigShow ? 33 : 16,
+                },
+              },
+            },
+            data: [50, 25, 25], //进度条数值
           },
-      ],
+        ],
         series: [{
             // 内
             type: "bar",
-            barWidth: this.isBigShow?20:10,
+            barWidth: this.isBigShow ? 20 : 10,
             legendHoverLink: false,
             silent: true,
             itemStyle: {
@@ -424,29 +752,29 @@ export default {
             z: 1,
             animationEasing: "elasticOut"
           },
-        
-        //   {
-        //     // 分隔
-        //     type: 'pictorialBar',
-        //     symbolRotate: '-15',//倾斜度
-        //     itemStyle: {
-        //         normal: {
-        //             color: '#297260',
-        //         },
-        //     },
-        //     symbolRepeat: 'fixed',
-        //     symbolMargin: 5,//分割线间隔
-        //     symbol: 'rect',
-        //     symbolClip: true,
-        //     symbolSize: [2, 9],
-        //     symbolPosition: "start",
-        //     symbolOffset: [0, -1],
-        //     data: category,
-        //     z: 2,
-        //     animationEasing: 'elasticOut',
-        // },
-        
-         
+
+          //   {
+          //     // 分隔
+          //     type: 'pictorialBar',
+          //     symbolRotate: '-15',//倾斜度
+          //     itemStyle: {
+          //         normal: {
+          //             color: '#297260',
+          //         },
+          //     },
+          //     symbolRepeat: 'fixed',
+          //     symbolMargin: 5,//分割线间隔
+          //     symbol: 'rect',
+          //     symbolClip: true,
+          //     symbolSize: [2, 9],
+          //     symbolPosition: "start",
+          //     symbolOffset: [0, -1],
+          //     data: category,
+          //     z: 2,
+          //     animationEasing: 'elasticOut',
+          // },
+
+
         ]
       };
       this.peopleChart = echarts.init(document.getElementById('peopleChart'), null, {
@@ -454,7 +782,7 @@ export default {
       }); // 重新创建新的实例
       this.peopleChart.setOption(option);
     },
-  
+
   }
 
 

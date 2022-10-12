@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-09 15:38:27
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-11 20:49:32
+ * @LastEditTime: 2022-10-12 19:51:55
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\homePage\component\left.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -89,17 +89,11 @@
     </div>
     <div class="airQuality" v-if="!isBigShow">
       <div class="airQualityspan1 airQualityspan1small">空气质量指标</div>
-      <!-- <span style="margin-left:2%">优：</span> -->
       <div class="airQualitycolor airQualitycolorsmall" style="background:#5ffd8f"></div>
-      <!-- <span>良：</span> -->
       <div class="airQualitycolor airQualitycolorsmall" style="background:#feff0c;margin-left: 12px;"></div>
-      <!-- <span>轻度污染：</span> -->
       <div class="airQualitycolor airQualitycolorsmall" style="background:#ff760b;margin-left: 15px;"></div>
-      <!-- <span>中度污染：</span> -->
       <div class="airQualitycolor airQualitycolorsmall" style="background:#fb0400;"></div>
-      <!-- <span>重度污染：</span> -->
       <div class="airQualitycolor airQualitycolorsmall" style="background:#9f014e"></div>
-      <!-- <span>严重污染：</span> -->
       <div class="airQualitycolor airQualitycolorsmall" style="background:#740415"></div>
     </div>
     <div class="airQuality" v-if="!isBigShow">
@@ -118,21 +112,38 @@
     </div>
     <!-- 空气指标 -->
     <div class="air" style="margin-top:5%">
-
+      
+      <div class="airbox">
+        <span class="humiditysapn"></span>
+        <img class="humidityimg" src="../../../assets/images/homepage/chart1.png" alt="">
+        <div class="airchangecolor" v-for="(item,index) in amarr" :key="index" :style="{'background':indicators.time==item?humidityColor:''}"></div>
+      </div>
     </div>
-    <span class="airspan">空间湿度</span>
+    <span class="airspan"> 空间湿度</span>
     <div class="air">
-
+      <div class="airbox">
+        <span class="humiditysapn"></span>
+        <img class="humidityimg" src="../../../assets/images/homepage/chart2.png" alt="">
+        <div class="airchangecolor" v-for="(item,index) in amarr" :key="index" :style="{'background':indicators.time==item?temperatureColor:''}"></div>
+      </div>
     </div>
-    <span class="airspan">空间温度</span>
+    <span class="airspan">&ensp;空间温度</span>
     <div class="air">
-
+      <div class="airbox">
+        <span class="humiditysapn"></span>
+        <img class="humidityimg" src="../../../assets/images/homepage/chart3.png" alt="">
+        <div class="airchangecolor" v-for="(item,index) in amarr" :key="index" :style="{'background':indicators.time==item?carbonDioxideColor:''}"></div>
+      </div>
     </div>
-    <span class="airspan">二氧化碳</span>
+    <span class="airspan" >二氧化碳</span>
     <div class="air">
-
+      <div class="airbox">
+        <span class="humiditysapn"></span>
+        <img class="humidityimg" src="../../../assets/images/homepage/chart4.png" alt="">
+        <div class="airchangecolor" v-for="(item,index) in amarr" :key="index" :style="{'background':indicators.time==item?tvocColor:''}"></div>
+      </div>
     </div>
-    <span class="airspan">tvoc</span>
+    <span class="airspan"> tvoc</span>
     <div class="airspan">AM
       <span v-for="(item,index) in amarr" :key="index">{{item}}</span>
     </div>
@@ -151,7 +162,16 @@ export default {
     return {
       agechart: null,
       peopleChart: null,
-      amarr: ['0','01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+      amarr: ['0', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+      indicators://空气指标
+      {
+        time: '10',//时刻
+        humidity: 3,//湿度3个值 1~3 良好 舒适 稍差
+        temperature: 2,//温度3个值 1~3 良好 舒适 稍差
+        carbonDioxide: 4,//二氧化碳1~6 优~严重污染
+        tvoc: 2//tvoc1~6 优~严重污染
+      }
+
     }
   },
   created() {
@@ -160,6 +180,57 @@ export default {
       this.peopleChartShow()//进度条
     })
 
+  },
+  computed: {
+
+    humidityColor() {//湿度
+      let classClolr = ''
+      classClolr = this.indicators.humidity == 1 ? '#42ccff' : this.indicators.humidity == 2 ? '#62e389' : '#eaa500'
+      return classClolr
+    },
+    temperatureColor() {//温度
+      let classClolr = ''
+      classClolr = this.indicators.temperature == 1 ? '#42ccff' : this.indicators.temperature == 2 ? '#62e389' : '#eaa500'
+      return classClolr
+    },
+    carbonDioxideColor() {//二氧化碳
+        switch (this.indicators.carbonDioxide) {
+          case 1:
+            return '#5ffd8f'
+          case 2:
+            return '#feff0c'
+          case 3:
+            return '#ff760b'
+          case 4:
+            return '#fb0400'
+          case 5:
+            return '#9f004e'
+          case 6:
+            return '#750414'
+
+          default:
+            break;
+        }
+    },
+    tvocColor() {//tvoc
+        switch (this.indicators.tvoc) {
+          case 1:
+            return '#5ffd8f'
+          case 2:
+            return '#feff0c'
+          case 3:
+            return '#ff760b'
+          case 4:
+            return '#fb0400'
+          case 5:
+            return '#9f004e'
+          case 6:
+            return '#750414'
+
+          default:
+            break;
+        }
+    },
   },
   methods: {
 
@@ -183,7 +254,7 @@ section {
 .Statistics {
   width: 100%;
   height: 6.16%;
-  margin-top: 2vh;
+  margin-top: 5%;
   display: flex;
 
   img {

@@ -2,7 +2,7 @@
  * @Author: liufang
  * @Date: 2022-06-16 18:44:51
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-10 09:49:39
+ * @LastEditTime: 2022-10-12 10:32:46
  * @FilePath: \Relyto.FireFightingd:\relytosoft-mizar-media-ui\src\utils\request.js
  * @Description: 
  */
@@ -41,7 +41,8 @@ axios.defaults.headers['Content-Language'] = 'zh_CN'
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
   // baseURL: process.env.VUE_APP_BASE_URL,
-  baseURL:  document.querySelector('body').getAttribute('baseUrl'),
+  // baseURL:  document.querySelector('body').getAttribute('baseUrl'),
+  baseURL:'',
   
   // 超时
   timeout: 15000

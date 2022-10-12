@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-09 17:19:57
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-11 19:46:54
+ * @LastEditTime: 2022-10-12 19:49:46
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\homePage\component\right.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -34,17 +34,17 @@
         </div>
       </div>
     </div>
-    <TitleDetail>
+    <TitleDetail style="margin-left:6%">
       <p>同比去年当月能耗<span>Tendency</span></p>
-      <img src="../../../assets/images/homepage/titleDetail.png" alt="">
+      <img src="../../../assets/images/homepage/titleDetail1.png" alt="">
     </TitleDetail>
     <!-- 图 -->
     <div class="tendency">
       <div id="tendency"></div>
     </div>
-    <TitleDetail>
+    <TitleDetail style="margin-left:6%">
       <p>设备耗电类型<span>Equipment type</span></p>
-      <img src="../../../assets/images/homepage/titleDetail.png" alt="">
+      <img src="../../../assets/images/homepage/titleDetail2.png" alt="">
     </TitleDetail>
     <!-- 能耗图表 -->
     <div class="equipment">
@@ -61,11 +61,43 @@
 
       </div>
       <div class="equipments">
+        <!-- 样式不生效，强调样式 -->
+        <div class="equipmentimg">
+          <span>6456</span>
+          <img src="../../../assets/images/homepage/Chart_lineg.png" alt="">
+        </div>
+        <div class="equipmentimg ">
+          <span class="equipmentpan0">6456</span>
+          <img class="equipmentimg0" src="../../../assets/images/homepage/Chart_lineb.png" alt="">
+        </div>
+        <div class="equipmentimg">
+          <span class="equipmentpan1">6456</span>
+          <img class="equipmentimg1" src="../../../assets/images/homepage/Chart_lineg.png" alt="">
+        </div>
+        <div class="equipmentimg ">
+          <span class="equipmentpan2">6456</span>
+          <img class="equipmentimg2" src="../../../assets/images/homepage/Chart_lineb.png" alt="">
+        </div>
+        <div class="equipmentimg">
+          <span class="equipmentpan3">64563</span>
+          <img class="equipmentimg3" src="../../../assets/images/homepage/Chart_lineg.png" alt="">
+        </div>
+        <div class="equipmentimg ">
+          <span class="equipmentpan4">64563</span>
+          <img class="equipmentimg4" src="../../../assets/images/homepage/Chart_lineb.png" alt="">
+        </div>
+        <div class="equipmentimg">
+          <span class="equipmentpan5">64563</span>
+          <img class="equipmentimg5" src="../../../assets/images/homepage/Chart_lineg.png" alt="">
+        </div>
+        <div class="equipmentimg ">
+          <span class="equipmentpan6">64563</span>
+          <img class="equipmentimg6" src="../../../assets/images/homepage/Chart_lineb.png" alt="">
+        </div>
+
+
         <div id="equipment1">
-          <!-- <div class="equipment1">
-            <span>6456</span>
-            <img src="../../../assets/images/homepage/Chart_lineg.png" alt="">
-          </div> -->
+
         </div>
         <div id="equipment2">
 
@@ -82,7 +114,7 @@
     <div class="remark">
       <div class="light">
         <img src="../../../assets/images/homepage/light.png" alt="">
-       <span> 灯光照明</span>
+        <span> 灯光照明</span>
       </div>
       <div class="light">
         <img src="../../../assets/images/homepage/wind.png" alt="">
@@ -92,12 +124,12 @@
         <span>展示设备</span>
       </div>
       <div class="light"><img src="../../../assets/images/homepage/other.png" alt="">
-      <span>其他设备</span>
+        <span>其他设备</span>
+      </div>
     </div>
-    </div>
-    <TitleDetail>
+    <TitleDetail style="margin-left:6%">
       <p>当日耗电时段预警<span>Warning</span></p>
-      <img src="../../../assets/images/homepage/titleDetail.png" alt="">
+      <img src="../../../assets/images/homepage/titleDetail3.png" alt="">
     </TitleDetail>
     <div class="Warning">
       <div class="WarningTime WarningTimetop">
@@ -105,7 +137,7 @@
         <span>12:00~12:00</span>
         <span>20:00~04:00</span>
       </div>
-      <dv-decoration-2 style="width:100%;height:5px;color:#093a64;margin-top: 3%;"/>
+      <dv-decoration-2 style="width:100%;height:5px;color:#093a64;margin-top: 3%;" />
       <div class="WarningTime WarningTimetop1">
         <span :class="warnTendency.isHeiht1?'WarningTimecolor':''">{{warnTendency.isHeiht1?'偏高':'正常'}}</span>
         <span :class="warnTendency.isHeiht2?'WarningTimecolor':''">{{warnTendency.isHeiht2?'偏高':'正常'}}</span>
@@ -129,10 +161,10 @@ export default {
       equipmentchart2: null,
       equipmentchart3: null,
       equipmentchart4: null,
-      warnTendency:{//耗电时段是否偏高
-        isHeiht1:false,
-        isHeiht2:true,
-        isHeiht1:false,
+      warnTendency: {//耗电时段是否偏高
+        isHeiht1: false,
+        isHeiht2: true,
+        isHeiht1: false,
       }
     }
   },
@@ -200,9 +232,12 @@ export default {
 .round1 {
   background-color: #7ad5ff;
 }
+
 .tendency {
   width: 100%;
   height: 185px;
+  font-family: "ysbth";
+  color: white;
 }
 #tendency {
   width: 100%;
@@ -218,7 +253,7 @@ export default {
     width: 85%;
     height: 85%;
     position: absolute;
-    top: 26.5%;
+    top: 36.5%;
     left: 7.5%;
   }
 }
@@ -227,12 +262,100 @@ export default {
   display: flex;
   justify-content: space-between;
   margin: auto;
-  padding-top: 6%;
+  padding-top: 9%;
   position: relative;
+}
+.equipments div {
+  width: 65px;
+  height: 65px;
+
+  // background: yellow;
+}
+.equipmentimg {
+  position: absolute;
+
+
+  span {
+    position: absolute;
+    top: -31%;
+  left: 58%;
+  font-family: 'hemi';
+  font-size: 12px;
+  }
+  img {
+    width: 18px;
+    height: 21px;
+    top: -7%;
+    left: 54%;
+  }
+  .equipmentpan0{
+    top: 120%;
+    left: 18%;
+
+  }
+  .equipmentimg0{
+    top: 87%;
+    left: 35%;
+  }
+  .equipmentpan1{
+    top:-31%;
+    left: 195%;
+
+  }
+  .equipmentimg1{
+    top: -7%;
+    left:200%;
+  }
+  .equipmentpan2{
+    top: 120%;
+    left: 159%;
+
+  }
+  .equipmentimg2{
+    top: 87%;
+    left:175%;
+  }
+  
+  .equipmentpan3{
+    top:-31%;
+    left:331%;
+
+  }
+  .equipmentimg3{
+    top: -7%;
+    left:332%;
+  }
+  .equipmentpan4{
+    top: 120%;
+    left: 294%;
+
+  }
+  .equipmentimg4{
+    top: 87%;
+    left:318%;
+  }
+  .equipmentpan5{
+    top:-31%;
+    left:477%;
+
+  }
+  .equipmentimg5{
+    top: -7%;
+    left:473%;
+  }
+  .equipmentpan6{
+    top: 120%;
+    left: 438%;
+
+  }
+  .equipmentimg6{
+    top: 87%;
+    left:463%;
+  }
 }
 
 .equipmentTitle {
-  margin: 2.55% 0 0 6%;
+  margin: 4.55% 0 0 6%;
   font-size: 12px;
   font-family: "ysbth";
   display: flex;
@@ -259,67 +382,58 @@ export default {
   margin-left: 5%;
 }
 
-.equipments div {
-  width: 65px;
-  height: 65px;
-  // background: yellow;
-}
-
-
 .remark {
   width: 95%;
   height: 4.81%;
-  margin: -2% 0 0 2%;
+  margin: 3% 0 0 2%;
   display: flex;
   font-family: "ysbth";
   div {
     width: 25%;
     height: 100%;
   }
-  span{
+  span {
     letter-spacing: 1px;
   }
-  
 }
 .light {
   position: relative;
   font-size: 12px;
-  color: #C8EFFD;;
+  color: #c8effd;
   img {
     width: 54.5px;
     height: 54.5px;
     margin-top: 3px;
   }
-  span{
+  span {
     position: absolute;
     left: 41px;
     top: 23px;
   }
 }
-.Warning{
+.Warning {
   width: 80%;
   height: 95.5px;
   margin: auto;
   font-size: 12px;
   color: white;
-  
 
-  .WarningTime{
+  .WarningTime {
     font-family: "hemi";
-  
+
     display: flex;
     justify-content: space-around;
   }
-  .WarningTimetop{
+  .WarningTimetop {
     margin-top: 9%;
   }
-  .WarningTimetop1{
+  .WarningTimetop1 {
     margin-top: 3%;
     font-size: 12px;
     font-family: "ysbth";
   }
-  .WarningTimecolor{
-    color: #E94D27;
+  .WarningTimecolor {
+    color: #e94d27;
   }
 }
 @media screen and (width: 3840px) {
@@ -344,9 +458,88 @@ export default {
   .equipment {
     img {
       height: 296px;
-      top: 14.5%;
+      top: 24.5%;
     }
   }
+  .equipmentimg {
+ 
+  span {
+    position: absolute;
+    top: -31%;
+  left: 64%;
+  font-size: 14px;
+  }
+  img {
+    width: 36px;
+    height: 42px;
+    top: -7%;
+    left: 54%;
+  }
+  .equipmentpan0{
+    top: 127%;
+    left: 13%;
+
+  }
+  .equipmentimg0{
+    top: 87%;
+    left: 30%;
+  }
+  .equipmentpan1{
+    top:-31%;
+    left: 221%;
+
+  }
+  .equipmentimg1{
+    top: -7%;
+    left:214%;
+  }
+  .equipmentpan2{
+    top: 126%;
+    left:178%;
+
+  }
+  .equipmentimg2{
+    top: 87%;
+    left:201%;
+  }
+  
+  .equipmentpan3{
+    top:-31%;
+    left:395%;
+
+  }
+  .equipmentimg3{
+    top: -7%;
+    left:385%;
+  }
+  .equipmentpan4{
+    top: 126%;
+    left:342%;
+
+  }
+  .equipmentimg4{
+    top: 87%;
+    left:365%;
+  }
+  .equipmentpan5{
+    top:-31%;
+    left:558%;
+
+  }
+  .equipmentimg5{
+    top: -7%;
+    left:551%;
+  }
+  .equipmentpan6{
+    top: 126%;
+    left: 502%;
+
+  }
+  .equipmentimg6{
+    top: 87%;
+    left:530%;
+  }
+}
   .equipmentTitle {
     font-size: 18px;
   }
@@ -360,37 +553,38 @@ export default {
   }
   .equipment {
     height: 11.5vh;
-}
+  }
   .equipments div {
     width: 114px;
     height: 114px;
   }
+  .tendencytip {
+    font-size: 22px;
+  }
   .tendency {
     height: 387px;
   }
+
   .light {
-  font-size: 24px;
-  img {
-    width:109px;
-    height: 109px;
+    font-size: 24px;
+    img {
+      width: 109px;
+      height: 109px;
+    }
+    span {
+      position: absolute;
+      left: 82px;
+      top: 46px;
+    }
   }
-  span{
-    position: absolute;
-    left: 82px;
-    top:46px;
+
+  .Warning {
+    height: 191px;
+    font-size: 24px;
   }
-}
-.remark {
-  margin: 3% 0 0 2%;
-}
-.Warning{
-  height: 191px;
-  font-size: 24px;
-}
-.WarningTimetop1{
+  .WarningTimetop1 {
     margin-top: 3%;
     font-size: 22px;
   }
-
 }
 </style>

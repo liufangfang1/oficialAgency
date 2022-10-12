@@ -1,8 +1,8 @@
 <template>
   <div class="login">
-    <!-- <dv-full-screen-container> -->
+    <dv-full-screen-container>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" status-icon>
-        <p class="title">欢迎登录<span class="span">Welcome to Login</span></p>
+        <p class="logintitle">欢迎登录<span class="span">Welcome to Login</span></p>
         <el-form-item prop="username">
           <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="请输入用户名">
             <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
@@ -15,11 +15,10 @@
         </el-form-item>
         <el-form-item prop="code" v-if="captchaOnOff">
           <el-input v-model="loginForm.code" auto-complete="off" placeholder="验证码" style="width: 63%" @keyup.enter.native="handleLogin">
-            <!-- <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" /> -->
             <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
           </el-input>
-          <div class="login-code">
-            <img :src="codeUrl" @click="getCode" class="login-code-img" />
+          <div class="login-code" @click="refreshCode">
+            <DentifyCom :identifyCode="identifyCode" :contentWidth="contentWidth" :contentHeight="contentHeight"></DentifyCom>
           </div>
         </el-form-item>
         <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
@@ -32,17 +31,19 @@
         </div> -->
         </el-form-item>
       </el-form>
-    <!-- </dv-full-screen-container> -->
+    </dv-full-screen-container>
   </div>
 </template>
 
 <script>
-import { getCodeImg } from "@/api/login";
+
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from '@/utils/jsencrypt'
+import DentifyCom from './component/dentify.vue'
 
 export default {
   name: "Login",
+  components: { DentifyCom },
   data() {
     return {
       codeUrl: "",
@@ -51,9 +52,6 @@ export default {
         password: "",
         rememberMe: false,
         code: "",
-        uuid: "",
-        // grant_type: "password",
-        // client_id: 1001
       },
       loginRules: {
         username: [
@@ -69,31 +67,65 @@ export default {
       captchaOnOff: true,
       // 注册开关
       register: true,
-      redirect: undefined
+      redirect: undefined,
+      identifyCodes: "1234567890abcdefjhijklinopqrsduvwxyz", //随机串内容,从这里随机抽几个显示验证码
+      identifyCode: "", //验证码图片内容
+      contentWidth: 112,
+      contentHeight: 38,
+
     };
   },
   watch: {
     $route: {
       handler: function (route) {
+
         this.redirect = route.query && route.query.redirect;
       },
       immediate: true
     }
   },
   created() {
-    //this.getCode();
-    //this.getCookie();
+    if (document.body.clientHeight > 1080) {
+      this.contentWidth=226
+      this.contentHeight=87
+    }
+  
+    this.getCookie()
+  },
+  mounted() {
+    window.onresize = () => {
+      if (document.body.clientHeight > 1080) {
+        this.contentWidth=226
+      this.contentHeight=87
+
+      }else{
+        this.contentWidth=112
+        this.contentHeight=38
+      }
+    }
+    // 初始化验证码
+    this.identifyCode = "";
+    //参数：（1）随机串内容。（2）验证码显示位数
+    this.makeCode(this.identifyCodes, 4);
   },
   methods: {
-    getCode() {
-      getCodeImg().then(res => {
-        this.captchaOnOff = res.data.captchaOnOff === undefined ? true : res.data.captchaOnOff;
-        if (this.captchaOnOff) {
-          this.codeUrl = "data:image/gif;base64," + res.data.img;
-          this.loginForm.uuid = res.data.uuid;
-        }
-      });
+    refreshCode() {
+      this.identifyCode = "";
+      this.makeCode(this.identifyCodes, 4);
     },
+    //获取验证码的值
+    makeCode(o, l) {
+      for (let i = 0; i < l; i++) {
+        //通过循环获取字符串内随机几位
+        this.identifyCode +=
+          this.identifyCodes[this.randomNum(0, this.identifyCodes.length)];
+      }
+    },
+    //随机数字：用于当角标拿字符串的值
+    randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    },
+
     getCookie() {
       const username = Cookies.get("username");
       const password = Cookies.get("password");
@@ -117,14 +149,17 @@ export default {
             Cookies.remove("password");
             Cookies.remove('rememberMe');
           }
-          this.$store.dispatch("Login", this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || "/" }).catch(() => { this.loading = false; });
-          }).catch(() => {
-            this.loading = false;
-            if (this.captchaOnOff) {
-              this.getCode();
-            }
-          });
+          if (this.identifyCode == this.loginForm.code) {
+            this.$store.dispatch("Login", this.loginForm).then(() => {
+              this.$router.push({ path: "/homePage" }).catch(() => { this.loading = false; });
+            }).catch(() => {
+              this.loading = false;
+            });
+
+          } else {
+            this.$message.error('验证码输入错误！');
+          }
+
         }
       });
     }
@@ -132,7 +167,7 @@ export default {
 };
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style  lang="scss" scoped>
 .login {
   display: flex;
   justify-content: center;
@@ -142,10 +177,10 @@ export default {
   background-size: cover;
   position: relative;
 }
-.title {
+.logintitle {
   //   width: 4.19%;
   // height: 1.43%;
-  font-size: 30px;
+  font-size: 21px;
   font-family: "ysbth";
   color: #ffffff;
   font-weight: normal;
@@ -184,7 +219,7 @@ export default {
     border: 1px solid #61ffa9;
   }
   ::v-deep.el-checkbox__input.is-checked + .el-checkbox__label {
-    color: #FFFFFF;
+    color: #ffffff;
     font-family: "ysbth";
   }
   ::v-deep.el-input__inner {
@@ -206,13 +241,11 @@ export default {
   color: #bfbfbf;
 }
 .login-code {
-  width: 33%;
+  width: 26.5%;
   height: 38px;
   float: right;
-  img {
-    cursor: pointer;
-    vertical-align: middle;
-  }
+  border: 1px solid #61ffa9;
+;
 }
 .el-login-footer {
   height: 40px;
@@ -241,17 +274,22 @@ export default {
     font-family: "ysbth";
     font-size: 30px;
     letter-spacing: 5px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }
 .el-button--primary {
-  background: linear-gradient(270deg, rgba(97,255,169,0.19) 0%, #61FFA9 47%, rgba(97,255,169,0.19) 100%);
-opacity: 0.8;
+  background: linear-gradient(
+    270deg,
+    rgba(97, 255, 169, 0.19) 0%,
+    #61ffa9 47%,
+    rgba(97, 255, 169, 0.19) 100%
+  );
+  opacity: 0.8;
   color: #ffffff;
   border: transparent;
 }
 @media screen and (width: 3840px) {
-  .title {
+  .logintitle {
     font-size: 42px;
     .span {
       font-size: 38px;
@@ -263,8 +301,7 @@ opacity: 0.8;
       height: 87px;
       margin-top: 55px;
       font-size: 32px;
-      padding-left:110px
-
+      padding-left: 110px;
     }
 
     ::v-deep.el-input__prefix {
@@ -272,56 +309,61 @@ opacity: 0.8;
     }
     ::v-deep.el-input__inner {
       &::placeholder {
-    //  padding-left:86px;
-     padding-top: 10px;
+        //  padding-left:86px;
+        padding-top: 10px;
         font-size: 32px;
       }
     }
     ::v-deep.el-checkbox__label {
-    margin-top: 78px;
-    font-size: 28px;
-    padding-left: 28px;
-    line-height: 32px;
-  }
-  ::v-deep .el-checkbox__inner::after{
-    height: 24px;
-    left: 14px;
-    width: 11px
-  }
-  ::v-deep.el-checkbox__inner{
-    width: 39px;
-    height: 39px;
-
-  }
-  ::v-deep .el-button--medium{
-    height: 100px;
-    font-size: 50px;
-  }
-  //检验文字
-  ::v-deep.el-form-item__error{
-    font-size: 28px;
-    top: 130%;
-  }
-   //检验图标
-  ::v-deep.el-input__suffix{
-    right: 18px;
-    top: 82px;
-    font-size: 28px;
-  }
+      margin-top: 78px;
+      font-size: 28px;
+      padding-left: 28px;
+      line-height: 32px;
+    }
+    ::v-deep .el-checkbox__inner::after {
+      height: 24px;
+      left: 14px;
+      width: 11px;
+    }
+    ::v-deep.el-checkbox__inner {
+      width: 39px;
+      height: 39px;
+    }
+    ::v-deep .el-button--medium {
+      height: 100px;
+      font-size: 50px;
+    }
+    //检验文字
+    ::v-deep.el-form-item__error {
+      font-size: 28px;
+      top: 130%;
+    }
+    //检验图标
+    ::v-deep.el-input__suffix {
+      right: 18px;
+      top: 82px;
+      font-size: 28px;
+    }
   }
   .input-icon {
     height: 51px;
     width: 53px;
     margin-left: 36px;
-   
   }
   .butsub {
-  margin-top: 80px;
+    margin-top: 80px;
 
-  span {
-    font-size: 50px;
-    letter-spacing: 10px;
+    span {
+      font-size: 50px;
+      letter-spacing: 10px;
+    }
   }
+  .login-code{
+    width: 26.5%;
+    height: 87px;
+    float: right;
+    border: 1px solid #61ffa9;
+    margin: 6% 0 0 0;
 }
 }
 </style>

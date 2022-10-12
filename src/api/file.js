@@ -1,11 +1,12 @@
 /*
- * @Author: liufang
- * @Date: 2022-04-08 17:59:19
+ * @Author: liufang 1164457816@qq.com
+ * @Date: 2022-10-08 17:08:12
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-06-21 10:05:41
- * @FilePath: \visualizationd:\relytosoft-mizar-media-ui\src\api\file.js
- * @Description: 
+ * @LastEditTime: 2022-10-12 11:45:14
+ * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\api\file.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
+
 import request from '@/utils/request'
 // const prefix = '/api/fl'
 const prefix =''

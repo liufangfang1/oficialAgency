@@ -65,10 +65,19 @@ export const constantRoutes = [
     path: '/homePage',
     component: () => import('@/views/homePage/index'),
   },
+  
+  {
+    path: '/monitoring',
+    component: () => import('@/views/monitoring/index'),
+  },
+  {
+    path:'/sensor',
+    component: () => import('@/views/sensor/index'),
+  },
   {
     path: '',
     component: Layout,
-    redirect: '/homePage',
+    redirect: '/login',
     children: [
       {
         path: 'index',
@@ -102,7 +111,7 @@ export const dynamicRoutes = [
 
 export default new Router({
   // mode: 'history', // 去掉url中的#
-  mode: 'hash', // 去掉url中的#
+  mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })

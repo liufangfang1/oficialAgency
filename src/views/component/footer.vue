@@ -3,9 +3,9 @@
     <footer>
       <!-- 左边 -->
       <div>
-        <img class="footerimg" src="../../../assets/images/homepage/location.png" alt="">
+        <img class="footerimg" src="../../assets/images/homepage/location.png" alt="">
         <p class="location">{{city}}</p>
-        <img class="duoyunimg" src="../../../assets/images/homepage/duoyun.png" alt="">
+        <img class="duoyunimg" src="../../assets/images/homepage/duoyun.png" alt="">
         <p class="wd" v-show="tem1">{{tem1}} ℃ ~ {{tem2}} ℃</p>
         <p class="week">{{wea}} {{week}}</p>
       </div>
