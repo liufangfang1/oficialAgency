@@ -36,14 +36,14 @@
     
     <script>
   
-//   import CenterCom from './component/center.vue'
+  import CenterCom from '../monitoring/component/center.vue'
   import LeftCom from './component/left.vue'
   import RightCom from './component/right.vue'
   import FooterCom from '../component/footer.vue'
   import tabClickMixins from "@/mixins/tabClick";
   export default {
     name: "",
-    components: {  LeftCom, RightCom, FooterCom },
+    components: {CenterCom,  LeftCom, RightCom, FooterCom },
     mixins:[tabClickMixins],
     data() {
       return {
