@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-08 17:08:12
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-13 10:00:46
+ * @LastEditTime: 2022-10-13 17:04:07
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\main.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -23,14 +23,14 @@ import router from './router'
 import '@/iconfont/iconfont.css'
 import './assets/icons' // icon
 
-
+import './permission' // permission control
 // Vue.prototype.$baseUrl = document.querySelector('body').getAttribute('baseUrl')
 
-import { fullScreenContainer,decoration2,digitalFlop} from '@jiaminghi/data-view'
+import { fullScreenContainer,decoration2} from '@jiaminghi/data-view'
 import animated from 'animate.css'
 Vue.use(animated)
 
-Vue.use(fullScreenContainer).use(decoration2).use(digitalFlop)
+Vue.use(fullScreenContainer).use(decoration2)
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size

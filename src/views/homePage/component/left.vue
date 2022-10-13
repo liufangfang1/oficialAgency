@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-09 15:38:27
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-13 10:24:47
+ * @LastEditTime: 2022-10-13 11:02:29
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\homePage\component\left.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -18,7 +18,7 @@
           <img src="./../../../assets/images/homepage/Statistics1.png" alt="">
           <div>
             <div class="Statisticsp">
-              <!-- <dv-digital-flop :config="config" style="font-family:'hemi'"/> -->
+              <!-- <dv-digital-flop :config="config" /> -->
               200
             </div>
             <div class="yuyue">今日预约</div>
@@ -115,7 +115,7 @@
     </div>
     <!-- 空气指标 -->
     <div class="air" style="margin-top:5%">
-      
+
       <div class="airbox">
         <span class="humiditysapn"></span>
         <img class="humidityimg" src="../../../assets/images/homepage/chart1.png" alt="">
@@ -138,7 +138,7 @@
         <div class="airchangecolor" v-for="(item,index) in amarr" :key="index" :style="{'background':indicators.time==item?carbonDioxideColor:''}"></div>
       </div>
     </div>
-    <span class="airspan" >二氧化碳</span>
+    <span class="airspan">二氧化碳</span>
     <div class="air">
       <div class="airbox">
         <span class="humiditysapn"></span>
@@ -174,16 +174,16 @@ export default {
         carbonDioxide: 4,//二氧化碳1~6 优~严重污染
         tvoc: 2//tvoc1~6 优~严重污染
       },
-      statisticsTimer:null,//今日预约定时器
-      config:{
-        number: [100],
-        style: {
-    	//这里可以修改默认样式
-        fontSize: 32,//字体大小
-        fill: '#FFFFFF',//字体颜色
-        fontFamily: "hemi"
-    }
-      }
+      statisticsTimer: null,//今日预约定时器
+      // config: {
+      //   number: [100],
+      //   style: {
+      //     //这里可以修改默认样式
+      //     fontSize: 32,//字体大小
+      //     fill: '#FFFFFF',//字体颜色
+      //     fontFamily: "hemi"
+      //   }
+      // }
 
     }
   },
@@ -192,16 +192,12 @@ export default {
       this.ageChartShow()
       this.peopleChartShow()//进度条
     })
-    // setTimeout(() => {
-    //   this.config.number[0] = 200;
-    //   this.config=  {...this.config};//对象解构，更新props
-    // }, 1000);
 
   },
-  mounted(){
-//    this.statisticsTimer= setInterval( ()=>{
-//       this.statisticspower();
-// },5000);
+  mounted() {
+    // this.statisticsTimer = setInterval(() => {
+    //   this.statisticspower();
+    // }, 5000);
   },
   computed: {
 
@@ -216,51 +212,49 @@ export default {
       return classClolr
     },
     carbonDioxideColor() {//二氧化碳
-        switch (this.indicators.carbonDioxide) {
-          case 1:
-            return '#5ffd8f'
-          case 2:
-            return '#feff0c'
-          case 3:
-            return '#ff760b'
-          case 4:
-            return '#fb0400'
-          case 5:
-            return '#9f004e'
-          case 6:
-            return '#750414'
+      switch (this.indicators.carbonDioxide) {
+        case 1:
+          return '#5ffd8f'
+        case 2:
+          return '#feff0c'
+        case 3:
+          return '#ff760b'
+        case 4:
+          return '#fb0400'
+        case 5:
+          return '#9f004e'
+        case 6:
+          return '#750414'
 
-          default:
-            break;
-        }
+        default:
+          break;
+      }
     },
     tvocColor() {//tvoc
-        switch (this.indicators.tvoc) {
-          case 1:
-            return '#5ffd8f'
-          case 2:
-            return '#feff0c'
-          case 3:
-            return '#ff760b'
-          case 4:
-            return '#fb0400'
-          case 5:
-            return '#9f004e'
-          case 6:
-            return '#750414'
+      switch (this.indicators.tvoc) {
+        case 1:
+          return '#5ffd8f'
+        case 2:
+          return '#feff0c'
+        case 3:
+          return '#ff760b'
+        case 4:
+          return '#fb0400'
+        case 5:
+          return '#9f004e'
+        case 6:
+          return '#750414'
 
-          default:
-            break;
-        }
+        default:
+          break;
+      }
     },
   },
   methods: {
-    
-    statisticspower(){
-    this.config.number[0] = 200;
-    this.config=  {...this.config};//对象解构，更新props
-}
-
+    // statisticspower() {
+    //   this.config.number[0] = 200;
+    //   this.config = { ...this.config };//对象解构，更新props
+    // }
 
   },
   beforeDestroy() {
