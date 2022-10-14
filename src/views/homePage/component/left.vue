@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-09 15:38:27
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-13 11:02:29
+ * @LastEditTime: 2022-10-14 14:14:37
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\homePage\component\left.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -154,8 +154,8 @@
   </div>
 </template>
 <script>
-import TitleCom from './title.vue'
-import TitleDetail from './titleDetail.vue'
+import TitleCom from '../../component/title.vue'
+import TitleDetail from '../../component/titleDetail.vue'
 import ageChartNixins from "@/mixins/ageChart";
 
 export default {
@@ -168,11 +168,11 @@ export default {
       amarr: ['0', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
       indicators://空气指标
       {
-        time: '10',//时刻
+        time: '09',//时刻
         humidity: 3,//湿度3个值 1~3 良好 舒适 稍差
         temperature: 2,//温度3个值 1~3 良好 舒适 稍差
-        carbonDioxide: 4,//二氧化碳1~6 优~严重污染
-        tvoc: 2//tvoc1~6 优~严重污染
+        carbonDioxide: 4,//二氧化碳 1~6 优~严重污染
+        tvoc: 2//tvoc  1~6 优~严重污染
       },
       statisticsTimer: null,//今日预约定时器
       // config: {
