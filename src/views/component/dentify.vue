@@ -19,7 +19,7 @@
       fontSizeMin: {
         // 字体最小值
         type: Number,
-        default: 25,
+        default: 28,
       },
       fontSizeMax: {
         // 字体最大值
@@ -71,7 +71,7 @@
       this.fontSizeMax=48
 
       }else{
-        this.fontSizeMin=25
+        this.fontSizeMin=28
       this.fontSizeMax=35
       }
     }

@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-09 15:38:27
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-14 14:14:37
+ * @LastEditTime: 2022-10-15 15:24:46
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\homePage\component\left.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -42,14 +42,21 @@
         <div>
           <div class="receptionnum">全年接待量<span>（人）</span></div>
           <div class="receptionp">3570</div>
+         
         </div>
         <div>
           <img class="receptionimg" src="../../../assets/images/homepage/muman.png" alt="">
           <span class="receptionspan1">50%</span>
+          <div class="receptionpMan">
+            男性
+          </div>
         </div>
         <div class="receptionimg1">
           <img class="receptionimg " src="../../../assets/images/homepage/man.png" alt="">
           <span class="receptionspan1 receptionspan2">50%</span>
+          <div class="receptionpWuman">
+            女性
+          </div>
         </div>
       </div>
       <!-- 年龄分布 -->

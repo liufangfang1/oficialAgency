@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-07 17:32:45
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-09 10:08:22
+ * @LastEditTime: 2022-10-16 14:36:48
  * @FilePath: \relytosoft-mizar-media-uie:\project\egProject\src\views\homePage\component\center.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -54,11 +54,11 @@ export default {
      * 光源设置
      */
     //点光源
-    // var point = new THREE.PointLight(0xffffff);
-    // point.position.set(400, 200, 300); //点光源位置
+    var point = new THREE.PointLight(0xffffff,0.8);
+    point.position.set(400, 200, 300); //点光源位置
     // scene.add(point); //点光源添加到场景中
     // //环境光
-    var ambient = new THREE.AmbientLight(0x444444);
+    var ambient = new THREE.AmbientLight(0x444444,0.8);
     scene.add(ambient);
     /**
      * 相机设置
@@ -70,7 +70,10 @@ export default {
     var k = width / height; //窗口宽高比
     var s = 50; //三维场景显示范围控制系数，系数越大，显示的范围越大
     //创建相机对象
-    var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+    // var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+    
+var camera = new THREE.PerspectiveCamera(9, width / height, 1, 1000);
+
     // camera.position.set(200, 600, 200); //设置相机位置
     camera.position.set(400, 200, 300); //设置相机位置
     camera.lookAt(scene.position); //设置相机方向(指向的场景对象)
@@ -90,8 +93,9 @@ export default {
     //半球光
     const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 2);
     scene.add(light);
+
     //辅助线
-    scene.add(new THREE.AxesHelper(100))
+    // scene.add(new THREE.AxesHelper(100))
 
     //引入fbx模型
     // let mixer = null
@@ -111,10 +115,10 @@ export default {
     //引入glb文件
     let mixers = []
     const loader = new GLTFLoader();
-    loader.load('/resources/dh.glb', (gltf) => {
+    loader.load('vue/dh1.glb', (gltf) => {
       console.log(gltf)
 
-      // const mesh = gltf.scene.children[0];
+      const mesh = gltf.scene.children[4];
 
       // const s = 0.35;
       // mesh.scale.set(s, s, s);
@@ -126,9 +130,10 @@ export default {
 
       // scene.add(mesh);
 
-      // const mixer = new THREE.AnimationMixer(mesh);
-      // mixer.clipAction(gltf.animations[0]).setDuration(1).play();
-      // mixers.push(mixer);
+      const mixer = new THREE.AnimationMixer(mesh);
+      mixer.clipAction(gltf.animations[0]).setDuration(1).play();
+      mixers.push(mixer);
+      scene.position.y=-10
       scene.add(gltf.scene);
     console.log(gltf);
     // renderer.render(scene, camera);
@@ -146,11 +151,11 @@ export default {
       //glb动画
       const delta = clock.getDelta();
 
-      // for (let i = 0; i < mixers.length; i++) {
+      for (let i = 0; i < mixers.length; i++) {
 
-      //   mixers[i].update(delta);
+        mixers[i].update(delta);
 
-      // }
+      }
       renderer.render(scene, camera);//执行渲染操作
       // mesh.rotateY(0.01);//每次绕y轴旋转0.01弧度
       // requestAnimationFrame(render);//请求再次执行渲染函数render，渲染下一帧

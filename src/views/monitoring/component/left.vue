@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-12 20:05:03
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-14 14:16:15
+ * @LastEditTime: 2022-10-15 16:14:17
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\monitoring\component\left.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -53,7 +53,9 @@
     </TitleCom>
     <!-- part3 -->
     <div class="partThree">
-      <img src="../../../assets/images/monitor/partThree.png" alt="">
+      <img v-show="securityLevel==1" src="../../../assets/images/monitor/partThree.png" alt="">
+      <img v-show="securityLevel==2" src="../../../assets/images/monitor/partThree2.png" alt="">
+      <img v-show="securityLevel==3" src="../../../assets/images/monitor/partThree3.png" alt="">
       <div class="partThreeText">
         <div class="partThreeTexttitle">空间人数</div>
         <div class="partThreename">

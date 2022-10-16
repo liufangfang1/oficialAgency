@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-13 11:10:25
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-13 15:13:44
+ * @LastEditTime: 2022-10-15 15:20:19
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\component\inspection.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -15,8 +15,14 @@
       </div>
     </div>
     <div class="inspection">
-      <span>{{showDirection?'智能巡检':'告警中心'}}</span>
-      <img class="xj" src="../../assets/images/homepage/xj.png" alt="" @click="handleShowxj">
+      <span style="margin-top:2%">{{discrtion}}</span>
+
+      <div class="xj" @click="handleShowxj">
+        <div class="fans"></div>
+        <img src="../../assets/images/homepage/xj.png" alt="">
+
+      </div>
+
       <img v-show="!showDirection" class="inspectionjt" src="../../assets/images/homepage/jiantou.png" alt="">
       <img v-show="showDirection" class="inspectionjt" src="../../assets/images/homepage/rightjiantou.png" alt="" @click="showDirection=false">
     </div>
@@ -45,6 +51,7 @@ export default {
       timer: null,
       showDirection: false,
       showxj: false,
+      discrtion: '智能巡检',
       checkList: ['消防风机'],
       checkboxData: [
         {
@@ -97,10 +104,13 @@ export default {
       this.timer = setTimeout(() => {
         this.showDirection = true
         this.showxj = false
-      }, 5000);
+        this.discrtion = '告警中心'
+      }, 2000);
     },
     HiddenViewStyle() {
       this.showDirection = false
+      this.discrtion = '智能巡检'
+
     }
 
 
@@ -121,13 +131,44 @@ export default {
   margin-left: 27%;
 
   .xj {
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    img {
+      width: 26px;
+      height: 26px;
+      position: absolute;
+      left: 5px;
+      top: 5px;
+    }
+  }
+  .fans {
+    width: 30px;
+    height: 30px;
+  }
+  .fans::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    top: -50%;
+    right: -50%;
+    transform-origin: 0% 100%;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to right, transparent, #45b987);
+    border-image-slice: 3;
+    background: transparent;
+    background-image: linear-gradient(to right, transparent, #46bb88);
+    animation: rotateAnimate 1s linear infinite;
   }
   .inspectionjt {
     width: 23px;
     height: 14px;
-    margin-top: 6px;
+    margin-top: 5%;
   }
 }
 .animation {
@@ -164,14 +205,13 @@ export default {
     background-image: linear-gradient(to right, transparent, #46bb88);
     animation: rotateAnimate 2s linear infinite;
   }
-
-  @keyframes rotateAnimate {
-    from {
-      transform: rotate(0deg) skew(-10deg);
-    }
-    to {
-      transform: rotate(360deg) skew(-10deg);
-    }
+}
+@keyframes rotateAnimate {
+  from {
+    transform: rotate(0deg) skew(-10deg);
+  }
+  to {
+    transform: rotate(360deg) skew(-10deg);
   }
 }
 .warm {
@@ -219,13 +259,30 @@ export default {
     font-size: 24px;
     line-height: 53px;
     .xj {
-      width: 53px;
-      height: 53px;
+      width: 60px;
+      height: 60px;
+      img{
+        width: 52px;
+      height: 52px;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+
+      }
     }
+    .fans {
+    width: 60px;
+    height: 60px;
+  }
+  .fans::after {
+    width: 60px;
+    height:60px;
+   
+  }
     .inspectionjt {
       width: 46px;
       height: 29px;
-      margin-top: 8px;
+      // margin-top: 8px;
     }
   }
   .animation {
@@ -275,5 +332,6 @@ export default {
       font-size: 34px;
     }
   }
+
 }
 </style>

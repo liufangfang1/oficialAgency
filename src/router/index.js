@@ -77,15 +77,15 @@ export const constantRoutes = [
   {
     path: '',
     component: Layout,
-    redirect: '/login',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/index'),
-        name: 'Index',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
-      }
-    ]
+    redirect: 'homePage',
+    // children: [
+    //   {
+    //     path: 'index',
+    //     component: () => import('@/views/index'),
+    //     name: 'Index',
+    //     meta: { title: '首页', icon: 'dashboard', affix: true }
+    //   }
+    // ]
   },
  
  

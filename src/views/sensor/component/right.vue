@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-12 20:10:28
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-14 16:37:55
+ * @LastEditTime: 2022-10-15 16:07:13
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\sensor\component\right.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,7 +13,7 @@
       </TitleCom>
       <TitleDetail style="margin-left:6%">
       <p>传感器状态<span>Sensor Status</span></p>
-      <img src="../../../assets/images/homepage/titleDetail1.png" alt="">
+      <img src="../../../assets/images/monitor/Sensordet.png" alt="">
     </TitleDetail>
       <!-- 列表 -->
       <div class="playList">
@@ -22,7 +22,7 @@
         </el-col>
         <el-col :span="4">
           <img class="listplay" v-if="item.status" src="../../../assets/images/monitor/sensor.png" alt="">
-          <img class="listplay" v-else src="../../../assets/images/monitor/listplay1.png" alt="">
+          <img class="listplay" v-else src="../../../assets/images/monitor/sensor1.png" alt="">
         </el-col>
         <el-col :span="14">
           {{item.cameraName}}
@@ -91,13 +91,13 @@
 }
 .playListRow {
   width: 100%;
-  height: 31px;
+  height: 38px;
   /* background-image: url('../../../assets/images/monitor/playbg.png');
   background-size: 100% 100%; */
   color: #c9efff;
   font-family: "ysbth";
   font-size: 12px;
-  line-height: 31px;
+  line-height: 38px;
   margin-top: 3%;
   position: relative;
   .playbg {
@@ -111,6 +111,7 @@
     width: 28px;
     height: 28px;
     margin-left: 13%;
+    margin-top: 8%;
   }
 }
 .playListCol1 {
@@ -124,9 +125,9 @@
     height: 860px;
   }
   .playListRow {
-    height: 62px;
+    height:76px;
     font-size: 21px;
-    line-height: 62px;
+    line-height: 76px;
     .listplay {
     width:57px;
     height: 57px;

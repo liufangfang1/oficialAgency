@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-12 20:05:11
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-14 15:41:48
+ * @LastEditTime: 2022-10-15 11:25:56
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\monitoring\component\right.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -238,13 +238,13 @@ export default {
 }
 .playListRow {
   width: 100%;
-  height: 31px;
+  height: 38px;
   /* background-image: url('../../../assets/images/monitor/playbg.png');
   background-size: 100% 100%; */
   color: #c9efff;
   font-family: "ysbth";
   font-size: 12px;
-  line-height: 31px;
+  line-height: 38px;
   margin-top: 3%;
   position: relative;
   .playbg {
@@ -258,6 +258,7 @@ export default {
     width: 28px;
     height: 28px;
     margin-left: 13%;
+    margin-top: 8%;
   }
 }
 .playListCol1 {
@@ -273,9 +274,9 @@ export default {
     height: 860px;
   }
   .playListRow {
-    height: 62px;
+    height: 76px;
     font-size: 21px;
-    line-height: 62px;
+    line-height: 76px;
     .listplay {
     width:57px;
     height: 57px;
