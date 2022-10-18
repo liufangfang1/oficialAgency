@@ -58,8 +58,8 @@ const user = {
       return new Promise((resolve, reject) => {
         login(username, password).then(res => {
           if(res.data){
-            setToken(res.data)
-            commit('SET_TOKEN', res.data)
+            setToken(res.data.token)
+            commit('SET_TOKEN', res.data.token)
           }
           resolve()
         }).catch(error => {

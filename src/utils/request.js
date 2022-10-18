@@ -2,7 +2,7 @@
  * @Author: liufang
  * @Date: 2022-06-16 18:44:51
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-16 11:29:56
+ * @LastEditTime: 2022-10-16 16:02:12
  * @FilePath: \Relyto.FireFightingd:\relytosoft-mizar-media-ui\src\utils\request.js
  * @Description: 
  */
@@ -55,7 +55,7 @@ service.interceptors.request.use(config => {
   // 是否需要防止数据重复提交
   const isRepeatSubmit = (config.headers || {}).repeatSubmit === false
   if (getToken() && !isToken) {
-    config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    config.headers['token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
   }
   // get请求映射params参数
   if (config.method === 'get' && config.params) {

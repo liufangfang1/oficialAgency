@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-09 17:19:57
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-14 14:14:57
+ * @LastEditTime: 2022-10-17 10:42:08
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\homePage\component\right.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -20,7 +20,7 @@
       <div class="electricitytext">
         <div class='round'></div>
         <div>
-          <span class="span1">44831.2</span>
+          <span class="span1">{{statistics.sum}}</span>
           <span class="span2">kw</span>
           <div class="span3">今日耗电总量</div>
         </div>
@@ -28,7 +28,7 @@
       <div class="electricitytext">
         <div class='round round1'></div>
         <div>
-          <span class="span1">499</span>
+          <span class="span1">{{statistics.number}}</span>
           <span class="span2">S</span>
           <div class="span3">接入能耗设备总台数</div>
         </div>
@@ -95,7 +95,6 @@
           <img class="equipmentimg6" src="../../../assets/images/homepage/Chart_lineb.png" alt="">
         </div>
 
-
         <div id="equipment1">
 
         </div>
@@ -147,6 +146,7 @@
   </div>
 </template>
 <script>
+import { deviceAlarm, getCompare,getenergy ,getstatistics} from '@/api/homePage'
 import TitleCom from '../../component/title.vue'
 import TitleDetail from '../../component/titleDetail.vue'
 import tendencyChartNixins from "@/mixins/tendencyChart";
@@ -165,10 +165,20 @@ export default {
         isHeiht1: false,
         isHeiht2: true,
         isHeiht1: false,
+      },
+      deviceAlarmTimer: null,
+      compareTimer: null,
+      statistics:{//能耗监测
+        sum:44831.2,
+        number:499
       }
     }
   },
   created() {
+    // this.getCompare()//同比去年当月能耗
+    // this.deviceAlarm()//当日耗电时段预警
+    // this.getenergy() //设备耗电类型
+    this.getstatistics()//能耗监测
     this.$nextTick(() => {
       this.tendencyChartShow()//能耗
       this.equipmentChar1()//耗电 灯光照明
@@ -177,8 +187,54 @@ export default {
       this.equipmentChar4()//耗电 其他设备
     })
 
+    // this.deviceAlarmTimer=setInterval(() => {
+    //   this.deviceAlarm()
+    // this.getstatistics()
+    // }, 1000*60*2);
+    // this.compareTimer=setInterval(() => {
+    //   this.getCompare()
+    // this.tendencyChartShow()//能耗
+    // this.getenergy() //设备耗电类型
+    // this.equipmentChar1()//耗电 灯光照明
+    //   this.equipmentChar2()//耗电 空调新风
+    //   this.equipmentChar3()//耗电 展示设备
+    //   this.equipmentChar4()//耗电 其他设备
+    // }, 1000*60*10);
+
   },
+  methods: {
+    deviceAlarm() {
+      deviceAlarm().then(res => {
+        if (res.data.length && res.data.length > 0) {
+
+        }
+
+      })
+    },
+    getCompare() {
+      getCompare().then(res => {
+        if (res.data.length && res.data.length > 0) {
+
+        }
+      })
+    },
+    getenergy() {
+      getenergy().then(res => {
+        if (res.data.length && res.data.length > 0) {
+
+        }
+      })
+    },
+    getstatistics(){
+      getstatistics().then(res=>{
+this.statistics=res.data
+      })
+    }
+  },
+
   beforeDestroy() {
+    clearInterval(this.deviceAlarmTimer)
+    clearInterval(this.compareTimer)
     if (!this.tendencyChart || !this.equipmentchart1) {
       return
     }
@@ -274,13 +330,12 @@ export default {
 .equipmentimg {
   position: absolute;
 
-
   span {
     position: absolute;
     top: -31%;
-  left: 58%;
-  font-family: 'hemi';
-  font-size: 12px;
+    left: 58%;
+    font-family: "hemi";
+    font-size: 12px;
   }
   img {
     width: 18px;
@@ -288,69 +343,62 @@ export default {
     top: -7%;
     left: 54%;
   }
-  .equipmentpan0{
+  .equipmentpan0 {
     top: 120%;
     left: 18%;
-
   }
-  .equipmentimg0{
+  .equipmentimg0 {
     top: 87%;
     left: 35%;
   }
-  .equipmentpan1{
-    top:-31%;
+  .equipmentpan1 {
+    top: -31%;
     left: 195%;
-
   }
-  .equipmentimg1{
+  .equipmentimg1 {
     top: -7%;
-    left:200%;
+    left: 200%;
   }
-  .equipmentpan2{
+  .equipmentpan2 {
     top: 120%;
     left: 159%;
-
   }
-  .equipmentimg2{
+  .equipmentimg2 {
     top: 87%;
-    left:175%;
+    left: 175%;
   }
-  
-  .equipmentpan3{
-    top:-31%;
-    left:331%;
 
+  .equipmentpan3 {
+    top: -31%;
+    left: 331%;
   }
-  .equipmentimg3{
+  .equipmentimg3 {
     top: -7%;
-    left:332%;
+    left: 332%;
   }
-  .equipmentpan4{
+  .equipmentpan4 {
     top: 120%;
     left: 294%;
-
   }
-  .equipmentimg4{
+  .equipmentimg4 {
     top: 87%;
-    left:318%;
+    left: 318%;
   }
-  .equipmentpan5{
-    top:-31%;
-    left:477%;
-
+  .equipmentpan5 {
+    top: -31%;
+    left: 477%;
   }
-  .equipmentimg5{
+  .equipmentimg5 {
     top: -7%;
-    left:473%;
+    left: 473%;
   }
-  .equipmentpan6{
+  .equipmentpan6 {
     top: 120%;
     left: 438%;
-
   }
-  .equipmentimg6{
+  .equipmentimg6 {
     top: 87%;
-    left:463%;
+    left: 463%;
   }
 }
 
@@ -462,84 +510,76 @@ export default {
     }
   }
   .equipmentimg {
- 
-  span {
-    position: absolute;
-    top: -31%;
-  left: 64%;
-  font-size: 14px;
-  }
-  img {
-    width: 36px;
-    height: 42px;
-    top: -7%;
-    left: 54%;
-  }
-  .equipmentpan0{
-    top: 127%;
-    left: 13%;
+    span {
+      position: absolute;
+      top: -31%;
+      left: 64%;
+      font-size: 14px;
+    }
+    img {
+      width: 36px;
+      height: 42px;
+      top: -7%;
+      left: 54%;
+    }
+    .equipmentpan0 {
+      top: 127%;
+      left: 13%;
+    }
+    .equipmentimg0 {
+      top: 87%;
+      left: 30%;
+    }
+    .equipmentpan1 {
+      top: -31%;
+      left: 221%;
+    }
+    .equipmentimg1 {
+      top: -7%;
+      left: 214%;
+    }
+    .equipmentpan2 {
+      top: 126%;
+      left: 178%;
+    }
+    .equipmentimg2 {
+      top: 87%;
+      left: 201%;
+    }
 
+    .equipmentpan3 {
+      top: -31%;
+      left: 395%;
+    }
+    .equipmentimg3 {
+      top: -7%;
+      left: 385%;
+    }
+    .equipmentpan4 {
+      top: 126%;
+      left: 342%;
+    }
+    .equipmentimg4 {
+      top: 87%;
+      left: 365%;
+    }
+    .equipmentpan5 {
+      top: -31%;
+      left: 558%;
+    }
+    .equipmentimg5 {
+      top: -7%;
+      left: 551%;
+    }
+    .equipmentpan6 {
+      top: 126%;
+      left: 502%;
+    }
+    .equipmentimg6 {
+      top: 87%;
+      left: 530%;
+    }
   }
-  .equipmentimg0{
-    top: 87%;
-    left: 30%;
-  }
-  .equipmentpan1{
-    top:-31%;
-    left: 221%;
-
-  }
-  .equipmentimg1{
-    top: -7%;
-    left:214%;
-  }
-  .equipmentpan2{
-    top: 126%;
-    left:178%;
-
-  }
-  .equipmentimg2{
-    top: 87%;
-    left:201%;
-  }
-  
-  .equipmentpan3{
-    top:-31%;
-    left:395%;
-
-  }
-  .equipmentimg3{
-    top: -7%;
-    left:385%;
-  }
-  .equipmentpan4{
-    top: 126%;
-    left:342%;
-
-  }
-  .equipmentimg4{
-    top: 87%;
-    left:365%;
-  }
-  .equipmentpan5{
-    top:-31%;
-    left:558%;
-
-  }
-  .equipmentimg5{
-    top: -7%;
-    left:551%;
-  }
-  .equipmentpan6{
-    top: 126%;
-    left: 502%;
-
-  }
-  .equipmentimg6{
-    top: 87%;
-    left:530%;
-  }
-}
   .equipmentTitle {
     font-size: 18px;
   }

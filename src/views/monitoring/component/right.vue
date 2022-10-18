@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-12 20:05:11
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-15 11:25:56
+ * @LastEditTime: 2022-10-17 15:15:06
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\monitoring\component\right.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -23,31 +23,33 @@
     </div>
     <!-- 列表 -->
     <div class="playList">
-      <el-row class="playListRow" v-for="(item,index) in playList" :key="index">
+      <el-row class="playListRow" v-for="(item,index) in cameraList" :key="index" >
         <el-col class="playListCol1" :span="4">
         </el-col>
         <el-col :span="4">
-          <img class="listplay" v-if="item.status" src="../../../assets/images/monitor/listplay.png" alt="">
+          <img class="listplay" v-if="item.status=='normal'" src="../../../assets/images/monitor/listplay.png" alt="">
           <img class="listplay" v-else src="../../../assets/images/monitor/listplay1.png" alt="">
         </el-col>
         <el-col :span="14">
-          {{item.cameraName}}
+          {{item.name}}
         </el-col>
         <el-col :span="3" >
-          {{item.status?'运行正常':'异常预警'}}
+          {{item.status=='normal'?'运行正常':'异常预警'}}
         </el-col>
-        <img class="playbg" v-if="item.status" src="../../../assets/images/monitor/playbg.png" alt="">
-        <img class="playbg" v-else src="../../../assets/images/monitor/playbg1.png" alt="">
+        <img class="playbg" v-if="item.status=='normal'" src="../../../assets/images/monitor/playbg.png" alt="" @click="handleCamera(item)">
+        <img class="playbg" v-else src="../../../assets/images/monitor/playbg1.png" alt="" @click="handleCamera(item)">
       </el-row>
-
     </div>
   </div>
 </template>
   <script>
 import TitleCom from '../../component/title.vue'
 import TitleDetail from '../../component/titleDetail.vue'
+import deviceMixins from "@/mixins/device";
+
 export default {
   components: { TitleCom, TitleDetail },
+  mixins:[deviceMixins],
   data() {
     return {
       currentVedio: 0,
@@ -84,31 +86,31 @@ export default {
         platformChannelCode: null,
         playStreamUrl: null,
       }],
-      playList: [
+      cameraList: [
         {
-          cameraId: null,
-          cameraName: '摄像头 EOS 2562-HGY1',
-          status: 1 //1正常  0故障
+          id: null,
+          name: '摄像头 EOS 2562-HGY1',
+          status:  "normal" //1正常  0故障
         },
         {
-          cameraId: null,
-          cameraName: '摄像头 EOS 2562-HGY2',
-          status: 1 //1正常  0故障
+          id: null,
+          name: '摄像头 EOS 2562-HGY2',
+          status:  "normal" //1正常  0故障
         },
         {
-          cameraId: null,
-          cameraName: '摄像头 EOS 2562-HGY3',
-          status: 1 //1正常  0故障
+          id: null,
+          name: '摄像头 EOS 2562-HGY3',
+          status:  "normal" //1正常  0故障
         },
         {
-          cameraId: null,
-          cameraName: '摄像头 EOS 2562-HGY4',
-          status: 1 //1正常  0故障
+          id: null,
+          name: '摄像头 EOS 2562-HGY4',
+          status:  "normal" //1正常  0故障
         },
         {
-          cameraId: null,
-          cameraName: '摄像头 EOS 2562-HGY5',
-          status: 0 //1正常  0故障
+          id: null,
+          name: '摄像头 EOS 2562-HGY5',
+          status: 'exception' //1正常  0故障
         },
       ]
     }
@@ -141,7 +143,13 @@ export default {
   methods: {
     handleVideo(item, index) {
       this.currentVedio = index;
-    }
+    },
+   
+    handleCamera(item){
+      clearInterval(this.cameratimer)
+        this.camerasId=item.id
+        this.getcamera()//获取单个传感器数据
+      },
 
   }
 }

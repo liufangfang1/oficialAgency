@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-12 20:10:28
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-15 16:07:13
+ * @LastEditTime: 2022-10-17 15:27:47
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\sensor\component\right.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -16,22 +16,22 @@
       <img src="../../../assets/images/monitor/Sensordet.png" alt="">
     </TitleDetail>
       <!-- 列表 -->
-      <div class="playList">
-      <el-row class="playListRow" v-for="(item,index) in sensorList" :key="index">
+      <div class="playList" >
+      <el-row class="playListRow" v-for="(item,index) in sensorList" :key="index" >
         <el-col class="playListCol1" :span="4">
         </el-col>
         <el-col :span="4">
-          <img class="listplay" v-if="item.status" src="../../../assets/images/monitor/sensor.png" alt="">
+          <img class="listplay" v-if="item.status=='normal'" src="../../../assets/images/monitor/sensor.png" alt="">
           <img class="listplay" v-else src="../../../assets/images/monitor/sensor1.png" alt="">
         </el-col>
         <el-col :span="14">
-          {{item.cameraName}}
+          {{item.name}}
         </el-col>
         <el-col :span="3" >
-          {{item.status?'运行正常':'异常预警'}}
+          {{item.status=='normal'?'运行正常':'异常预警'}}
         </el-col>
-        <img class="playbg" v-if="item.status" src="../../../assets/images/monitor/playbg.png" alt="">
-        <img class="playbg" v-else src="../../../assets/images/monitor/playbg1.png" alt="">
+        <img class="playbg" v-if="item.status=='normal'" src="../../../assets/images/monitor/playbg.png" alt="" @click="handleClick(item)">
+        <img class="playbg" v-else src="../../../assets/images/monitor/playbg1.png" alt="" @click="handleClick(item)">
       </el-row>
 
     </div>
@@ -40,35 +40,37 @@
   <script>
   import TitleCom from '../../component/title.vue'
   import TitleDetail from '../../component/titleDetail.vue'
+  import deviceMixins from "@/mixins/device";
   export default {
       components: { TitleCom,TitleDetail },
+      mixins:[deviceMixins],
     data() {
         return{
          sensorList: [
         {
-          cameraId: null,
-          cameraName: '烟感 EOS 2562-HGY1',
-          status: 1 //1正常  0故障
+          id: null,
+          name: '烟感 EOS 2562-HGY1',
+          status: "normal" //1正常  0故障
         },
         {
-          cameraId: null,
-          cameraName: '烟感 EOS 2562-HGY2',
-          status: 1 //1正常  0故障
+          id: null,
+          name: '烟感 EOS 2562-HGY2',
+          status: "normal" //1正常  0故障
         },
         {
-          cameraId: null,
-          cameraName: '湿度传感器 EOS 2562-HGY',
-          status: 1 //1正常  0故障
+          id: null,
+          name: '湿度传感器 EOS 2562-HGY',
+          status: "normal" //1正常  0故障
         },
         {
-          cameraId: null,
-          cameraName: '二氧化碳传感器 EOS 2562-HGY',
-          status: 1 //1正常  0故障
+          id: null,
+          name: '二氧化碳传感器 EOS 2562-HGY',
+          status: "normal" //1正常  0故障
         },
         {
-          cameraId: null,
-          cameraName: 'tvoc传感器 EOS 2562-HGY',
-          status: 0 //1正常  0故障
+          id: null,
+          name: 'tvoc传感器 EOS 2562-HGY',
+          status: 'exception' //1正常  0故障
         },
       ]
             
@@ -76,6 +78,11 @@
   
     },
     methods: {
+      handleClick(item){
+        this.sensorId=item.id
+        this.getSensor()//获取单个传感器数据
+      },
+    
       
   
     }

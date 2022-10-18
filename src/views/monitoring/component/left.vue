@@ -2,49 +2,49 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-12 20:05:03
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-15 16:14:17
+ * @LastEditTime: 2022-10-17 15:02:06
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\monitoring\component\left.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div>
     <TitleCom>
-      <p>入口监测<span>Monitor</span></p>
+      <p> {{cameraInfo.position}}监测<span>Monitor</span></p>
     </TitleCom>
     <!-- part1 -->
     <div class="partone">
       <img class="Monitorimg" src="../../../assets/images/monitor/monitor.png" alt="">
       <div class="Monitorname">
-        Num 0982
+        {{cameraInfo.name}}
       </div>
     </div>
     <!-- part2 -->
     <div class="partTwo">
-      <div class="playVideo">
-      </div>
+      <video autoplay class="playVideo" id="playVideo">
+      </video>
       <el-row class="videoName">
         <el-col :span="10">
-          实时入口监测
+          实时{{cameraInfo.position}}监测
         </el-col>
         <el-col :span="10">
-          Num 0982
+          {{cameraInfo.name}}
         </el-col>
-        <el-col :span="4" class="location">
+        <!-- <el-col :span="4" class="location">
           选择位置
+        </el-col> -->
+      </el-row>
+      <el-row class="originbox">
+        <el-col :span="4" class="origin">
+        </el-col>
+        <el-col :span="20" class="originstyle">
+          位置: {{cameraInfo.position}}
         </el-col>
       </el-row>
       <el-row class="originbox">
         <el-col :span="4" class="origin">
         </el-col>
         <el-col :span="20" class="originstyle">
-          位置: 入口
-        </el-col>
-      </el-row>
-      <el-row class="originbox">
-        <el-col :span="4" class="origin">
-        </el-col>
-        <el-col :span="20" class="originstyle">
-          当前画面总人数：: 15人
+          当前画面总人数：: {{cameraInfo.count}}人
         </el-col>
       </el-row>
     </div>
@@ -53,25 +53,25 @@
     </TitleCom>
     <!-- part3 -->
     <div class="partThree">
-      <img v-show="securityLevel==1" src="../../../assets/images/monitor/partThree.png" alt="">
-      <img v-show="securityLevel==2" src="../../../assets/images/monitor/partThree2.png" alt="">
-      <img v-show="securityLevel==3" src="../../../assets/images/monitor/partThree3.png" alt="">
+      <img v-show="status==1" src="../../../assets/images/monitor/partThree.png" alt="">
+      <img v-show="status==2" src="../../../assets/images/monitor/partThree2.png" alt="">
+      <img v-show="status==3" src="../../../assets/images/monitor/partThree3.png" alt="">
       <div class="partThreeText">
         <div class="partThreeTexttitle">空间人数</div>
         <div class="partThreename">
-          200 <span>人</span>
-          <img v-show="securityLevel==3" src="../../../assets/images/monitor/baojing.png" alt="">
+          {{number}} <span>人</span>
+          <img v-show="status==3" src="../../../assets/images/monitor/baojing.png" alt="">
         </div>
         <div class="salf" style="margin-top:23%">
           <div style=" background: #5efd8f"></div>
           <div>安全域值</div>
         </div>
         <div class="salf">
-          <div  style=" background: #fda55e"></div>
+          <div style=" background: #fda55e"></div>
           <div>临界域值</div>
         </div>
         <div class="salf">
-          <div  style=" background: #fb0300"></div>
+          <div style=" background: #fb0300"></div>
           <div>饱和状态</div>
         </div>
       </div>
@@ -80,18 +80,47 @@
   </div>
 </template>
 <script>
+import { getPeople } from '@/api/monitoring'
 import TitleCom from '../../component/title.vue'
+import deviceMixins from "@/mixins/device";
+
 export default {
   components: { TitleCom },
+  mixins:[deviceMixins],
   data() {
     return {
-      securityLevel:3//-安全域值  2-临界域值 3-饱和状态
+      number: 200,
+      status: 3,//-安全域值  2-临界域值 3-饱和状态
+      peopleTimer: null,
+      cameraInfo:{
+        name:'No.1',
+        position:'大门',
+        count:13
+      }
     }
 
   },
+  created() {
+    this.getPeople()//获取空间总人数
+    this.peopleTimer = setInterval(() => {
+      this.getPeople()
+    }, 1000 * 60);
+  },
   methods: {
+    getPeople() {
+      getPeople().then(res => {
+        this.number = res.data.number
+        this.status = res.data.status
 
+      })
+    },
+   
+
+  },
+  beforeDestroy(){
+    clearInterval(this.peopleTimer)
   }
+  
 }
 </script>
 <style scoped lang="scss">
@@ -215,9 +244,9 @@ export default {
     }
   }
 }
-.salf{
+.salf {
   display: flex;
-  margin: 8% 0 0 22%
+  margin: 8% 0 0 22%;
 }
 .salf > div:nth-child(1) {
   width: 12px;
@@ -229,7 +258,6 @@ export default {
   font-family: "ysbth";
   color: #c9efff;
   margin-left: 8%;
-
 }
 @media screen and (width: 3840px) {
   .partone {
@@ -307,14 +335,13 @@ export default {
     }
   }
   .salf > div:nth-child(1) {
-  width: 24px;
-  height: 24px;
-  margin-top: 4px;
-}
-.salf > div:nth-child(2) {
-  font-size: 28px;
-
-}
+    width: 24px;
+    height: 24px;
+    margin-top: 4px;
+  }
+  .salf > div:nth-child(2) {
+    font-size: 28px;
+  }
 }
 </style>
 

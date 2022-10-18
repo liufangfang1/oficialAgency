@@ -257,14 +257,8 @@ export default {
     ageChartShow() {
       var myData = ['>60', '50-60', '41-50', '31-40', '21-30', '<20']
       var lineData = [100, 100, 100, 100, 100, 100]
-      var lastYearData = {
-        1: [3, 20, 62, 34, 55, 65]//从小到大
-      }
-      var thisYearData = {
-        1: [66, 66, 39, 23,20, 11]//从大到小
-      }
+     
       var timeLineData = [1]
-
       let option = {
         baseOption: {
           timeline: {
@@ -449,7 +443,7 @@ export default {
               normal: {
                 show: false, //控制是否显示左边百分比
                 formatter: (series) => {
-                  return lastYearData[timeLineData[0]][series.dataIndex] + '%'
+                  return this.lastYearData[series.dataIndex] + '%'
                 },
                 position: 'insideTopLeft',
                 textStyle: {
@@ -491,7 +485,7 @@ export default {
             },
             // symbolRepeat: true,
             // symbolSize: 14,
-            data: lastYearData[timeLineData[0]],
+            data: this.lastYearData,
             // animationEasing: 'elasticOut',
             // animationDelay: function (dataIndex, params) {
             //     return params.index * 30 * 1.1;
@@ -518,7 +512,7 @@ export default {
               normal: {
                 show: false, //控制是否显示百分比
                 formatter: (series) => {
-                  return thisYearData[timeLineData[0]][series.dataIndex] + '%'
+                  return this.thisYearData[series.dataIndex] + '%'
                 },
                 position: 'insideTopRight',
                 textStyle: {
@@ -561,7 +555,7 @@ export default {
             },
             // symbolRepeat: true,
             // symbolSize: 14,
-            data: thisYearData[timeLineData[0]],
+            data: this.thisYearData,
             // animationEasing: 'elasticOut',
             // animationDelay: function (dataIndex, params) {
             //     return params.index * 30 * 1.1;

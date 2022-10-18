@@ -24,7 +24,7 @@
         <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">自动登录</el-checkbox>
         <el-form-item style="width:100%;">
           <el-button class="butsub" :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
-            <span>登陆</span>
+            <span>登录</span>
           </el-button>
           <!-- <div style="float: right;" v-if="register">
           <router-link class="link-type" :to="'/register'">立即注册</router-link>
@@ -90,7 +90,7 @@ export default {
       this.contentHeight=87
     }
   
-    // this.getCookie()
+    this.getCookie()
   },
   mounted() {
     window.onresize = () => {
@@ -126,29 +126,32 @@ export default {
       return Math.floor(Math.random() * (max - min) + min);
     },
 
-    // getCookie() {
-    //   const username = Cookies.get("username");
-    //   const password = Cookies.get("password");
-    //   const rememberMe = Cookies.get('rememberMe')
-    //   this.loginForm = {
-    //     username: username === undefined ? this.loginForm.username : username,
-    //     password: password === undefined ? this.loginForm.password : decrypt(password),
-    //     rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
-    //   };
-    // },
+    getCookie() {
+      const username = Cookies.get("username");
+      const password = Cookies.get("password");
+      const rememberMe = Cookies.get('rememberMe')
+      this.loginForm = {
+        username: username === undefined ? this.loginForm.username : username,
+        password: password === undefined ? this.loginForm.password : decrypt(password),
+        rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
+      };
+      if(rememberMe){
+        this.handleLogin()
+      }
+    },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true;
-          // if (this.loginForm.rememberMe) {
-          //   Cookies.set("username", this.loginForm.username, { expires: 30 });
-          //   Cookies.set("password", encrypt(this.loginForm.password), { expires: 30 });
-          //   Cookies.set('rememberMe', this.loginForm.rememberMe, { expires: 30 });
-          // } else {
-          //   Cookies.remove("username");
-          //   Cookies.remove("password");
-          //   Cookies.remove('rememberMe');
-          // }
+          if (this.loginForm.rememberMe) {
+            Cookies.set("username", this.loginForm.username, { expires: 30 });
+            Cookies.set("password", encrypt(this.loginForm.password), { expires: 30 });
+            Cookies.set('rememberMe', this.loginForm.rememberMe, { expires: 30 });
+          } else {
+            Cookies.remove("username");
+            Cookies.remove("password");
+            Cookies.remove('rememberMe');
+          }
           if (this.identifyCode == this.loginForm.code) {
             this.$store.dispatch("Login", this.loginForm).then(() => {
               this.$router.push({ path: "/homePage" }).catch(() => { this.loading = false; });
@@ -247,6 +250,7 @@ export default {
   height: 38px;
   float: right;
   border: 1px solid #61ffa9;
+  overflow: hidden;
 ;
 }
 .el-login-footer {

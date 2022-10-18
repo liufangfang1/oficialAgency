@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-12 20:15:26
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-13 16:02:53
+ * @LastEditTime: 2022-10-17 10:44:33
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\mixins\tabClick.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       tab: ['基地概括', '展示中心', '预约中心', '安防态势', '智慧管理', '工务署'],
-      tabChild:['传感器','监视器'],
+      tabChild:['环境指数','实时监控'],
       showChild:false
     }
   },
@@ -37,11 +37,11 @@ export default {
     },
     handleTabChildClick(item,index){
       this.tabcurrentIndex=index
-      if(item=='传感器'){
+      if(item=='环境指数'){
         this.$router.push({
           path:'/sensor'
         })
-      }else if(item=='监视器'){
+      }else if(item=='实时监控'){
         this.$router.push({
           path:'/monitoring'
         })

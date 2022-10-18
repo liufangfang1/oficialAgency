@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-09 15:38:27
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-15 15:24:46
+ * @LastEditTime: 2022-10-17 10:05:53
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\homePage\component\left.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -41,19 +41,19 @@
         <div class='round'></div>
         <div>
           <div class="receptionnum">全年接待量<span>（人）</span></div>
-          <div class="receptionp">3570</div>
-         
+          <div class="receptionp">{{statistics.numbers}}</div>
+
         </div>
         <div>
           <img class="receptionimg" src="../../../assets/images/homepage/muman.png" alt="">
-          <span class="receptionspan1">50%</span>
+          <span class="receptionspan1">{{statistics.men}}%</span>
           <div class="receptionpMan">
             男性
           </div>
         </div>
         <div class="receptionimg1">
           <img class="receptionimg " src="../../../assets/images/homepage/man.png" alt="">
-          <span class="receptionspan1 receptionspan2">50%</span>
+          <span class="receptionspan1 receptionspan2">{{statistics.women}}%</span>
           <div class="receptionpWuman">
             女性
           </div>
@@ -161,6 +161,7 @@
   </div>
 </template>
 <script>
+import { getContrastive, getdetection } from '@/api/homePage'
 import TitleCom from '../../component/title.vue'
 import TitleDetail from '../../component/titleDetail.vue'
 import ageChartNixins from "@/mixins/ageChart";
@@ -179,9 +180,18 @@ export default {
         humidity: 3,//湿度3个值 1~3 良好 舒适 稍差
         temperature: 2,//温度3个值 1~3 良好 舒适 稍差
         carbonDioxide: 4,//二氧化碳 1~6 优~严重污染
-        tvoc: 2//tvoc  1~6 优~严重污染
+        tvocd: 2//tvoc  1~6 优~严重污染
       },
       statisticsTimer: null,//今日预约定时器
+      statistics: {//全年接待量
+        numbers: 3570,
+        men: 50,
+        women: 50
+      },
+      lastYearData: [3, 20, 62, 34, 55, 65],//从小到大 男性
+      thisYearData: [66, 66, 39, 23, 20, 11],//从小到大 女性
+      delectionTimer:null,
+      contrasTimer:null
       // config: {
       //   number: [100],
       //   style: {
@@ -200,6 +210,17 @@ export default {
       this.peopleChartShow()//进度条
     })
 
+    this.getContrastive()//访客统计
+    this.getdetection() //获取空间状况
+    this.delectionTimer=setInterval(() => {
+      this.getdetection();
+    }, 1000*60*2);
+    this.contrasTimer=setInterval(() => {
+      this.getContrastive()//访客统计
+    }, 1000*60*1);
+
+
+
   },
   mounted() {
     // this.statisticsTimer = setInterval(() => {
@@ -207,7 +228,6 @@ export default {
     // }, 5000);
   },
   computed: {
-
     humidityColor() {//湿度
       let classClolr = ''
       classClolr = this.indicators.humidity == 1 ? '#42ccff' : this.indicators.humidity == 2 ? '#62e389' : '#eaa500'
@@ -237,8 +257,8 @@ export default {
           break;
       }
     },
-    tvocColor() {//tvoc
-      switch (this.indicators.tvoc) {
+    tvocColor() {//tvocd
+      switch (this.indicators.tvocd) {
         case 1:
           return '#5ffd8f'
         case 2:
@@ -262,9 +282,31 @@ export default {
     //   this.config.number[0] = 200;
     //   this.config = { ...this.config };//对象解构，更新props
     // }
+    getContrastive() {//访客统计
+      getContrastive().then(res => {
+        if (res.data.length && res.data.length > 0) {
+          this.statistics = res.data.statistics
+          let dataScouse = res.data.distribute
+          this.lastYearData = dataScouse.values(dataScouse.men)//男性
+          this.thisYearData = dataScouse.values(dataScouse.women).reverse()//女性
+        }
+
+      })
+
+    },
+    getdetection() {
+      getdetection().then(res => {
+        if (res.data.time) {
+          this.indicators = res.data
+        }
+
+      })
+    }
 
   },
   beforeDestroy() {
+    clearInterval(this.contrasTimer)
+    clearInterval(this.delectionTimer)
     if (!this.agechart || !this.peopleChart) {
       return
     }

@@ -5,8 +5,11 @@
       <div>
         <img class="footerimg" src="../../assets/images/homepage/location.png" alt="">
         <p class="location">{{city}}</p>
-        <img class="duoyunimg" src="../../assets/images/homepage/duoyun.png" alt="">
-        <p class="wd" v-show="tem1">{{tem1}} ℃ ~ {{tem2}} ℃</p>
+        <img v-if="weaType==1" class="duoyunimg" src="../../assets/images/homepage/duoyun.png" alt="">
+        <img v-if="weaType==2" class="duoyunimg" src="../../assets/images/homepage/duoyun.png" alt="">
+        <img v-if="weaType==3" class="duoyunimg" src="../../assets/images/homepage/duoyun.png" alt="">
+        <img v-if="weaType==4" class="duoyunimg" src="../../assets/images/homepage/duoyun.png" alt="">
+        <p class="wd" v-show="tem1">{{tem1}} ℃ </p>
         <p class="week">{{wea}} {{week}}</p>
       </div>
       <!-- 右边 -->
@@ -18,6 +21,7 @@
   </div>
 </template>
 <script>
+import { getWeatherInfo } from '@/api/homePage'
 import axios from "axios";
 import timeFormat from "@/utils/time.js";
 export default {
@@ -31,28 +35,50 @@ export default {
       nowYear: "2022/08/07",
       timeNow: "12:26:01",
       timer: null,
+      weaType:1,// 1-4 阴晴雨雪
+      tempTimer:null
     }
   },
   created() {
-    // this.getInTheatersData()
+    this.getInTheatersData()
     this.timer = setInterval(() => {
       this.nowTimeAndDate();
     }, 1000);
+    this.tempTimer = setInterval(() => {
+      this.getInTheatersData();
+    }, 1000*60*60);
   },
   methods: {
-    async getInTheatersData() {
-      const res = await axios.get(
-        "https://yiketianqi.com/api?unescape=1&version=v6&appid=69659768&appsecret=Q3W20NSX"
-      );
-      if (res.data) {
-        this.city = res.data.city
-        this.tem1 = res.data.tem1
-        this.tem2 = res.data.tem2
-        this.wea = res.data.wea
-        this.week = res.data.week
+    // async getInTheatersData() {
+    //   const res = await axios.get(
+    //     "https://yiketianqi.com/api?unescape=1&version=v6&appid=69659768&appsecret=Q3W20NSX"
+    //   );
+    //   if (res.data) {
+    //     this.city = res.data.city
+    //     this.tem1 = res.data.tem1
+    //     this.tem2 = res.data.tem2
+    //     this.wea = res.data.wea
+    //     this.week = res.data.week
 
-      }
-
+    //   }
+    // },
+    getInTheatersData() {
+      getWeatherInfo().then(res => {
+        if (res.data) {
+          this.city = res.data.name
+          this.tem1 = res.data.temp
+          this.wea = res.data.text
+          if(this.wea.includes('雪')){
+            this.weaType=4
+          }else if(this.wea.includes('雨')){
+            this.weaType=3
+          }else if(this.wea.includes('晴')){
+            this.weaType=2
+          }else{
+            this.weaType=1
+          }
+        }
+      })
     },
     nowTimeAndDate() {
       //获取当前时间 日期 
@@ -65,6 +91,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timer)
+    clearInterval(this.tempTimer)
   }
 }
 </script>

@@ -2,7 +2,7 @@
  * @Author: liufang 1164457816@qq.com
  * @Date: 2022-10-12 20:10:28
  * @LastEditors: liufang 1164457816@qq.com
- * @LastEditTime: 2022-10-16 10:11:40
+ * @LastEditTime: 2022-10-17 11:29:08
  * @FilePath: \relytosoft-mizar-media-uie:\project\oficialAgency\src\views\sensor\component\left.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -34,10 +34,10 @@
       <img src="../../../assets/images/monitor/templater.png" alt="">
     </TitleDetail>
   
-    <ShowCom :round="true" :styleBackground="'#65eaa1'" :span1="'温 度'" :span2="'22~28℃'" :imgType="1">
+    <ShowCom :round="true" :styleBackground="'#65eaa1'" :span1="'温 度'" :span2="delection.wendu" :imgType="1">
       <img slot="part2bg" class="part2bg" src="../../../assets/images/monitor/bgGreen.png" alt="">
     </ShowCom>
-    <ShowCom  :round="false" :styleBackground="'#77c0ff'" :span1="'相对湿度'" :span2="'40-80%'" :imgType="2">
+    <ShowCom  :round="false" :styleBackground="'#77c0ff'" :span1="'相对湿度'" :span2="delection.shidu" :imgType="2">
       <img slot="part2bg" class="part2bg" src="../../../assets/images/monitor/bgBlue.png" alt="">
     </ShowCom>
   
@@ -46,37 +46,54 @@
       <p>实时空气指标<span>Index</span></p>
       <img src="../../../assets/images/monitor/air.png" alt="">
     </TitleDetail>
-    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'CO2'" :span2="'1.0%'" :imgType="3">
+    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'CO2'" :span2="delection.co2" :imgType="3">
       <img slot="part2bg" class="part2bg" src="../../../assets/images/monitor/part2bg.png" alt="">
     </ShowCom>
-    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'甲 醛'" :span2="'0.06mg/m3'" :imgType="3">
+    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'甲 醛'" :span2="delection.jiaquan" :imgType="3">
       <img slot="part2bg" class="part2bg" src="../../../assets/images/monitor/part2bg.png" alt="">
     </ShowCom>
-    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'臭 氧'" :span2="'0.10mg/m3'" :imgType="3">
+    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'气 压'" :span2="delection.qiya" :imgType="3">
       <img slot="part2bg" class="part2bg" src="../../../assets/images/monitor/part2bg.png" alt="">
     </ShowCom>
-    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'pm2.5'" :span2="'0.06mg/m3'" :imgType="3">
+    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'pm2.5'" :span2="delection.pm" :imgType="3">
       <img slot="part2bg" class="part2bg" src="../../../assets/images/monitor/part2bg.png" alt="">
     </ShowCom>
-    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'pm10'" :span2="'0.08mg/m3'" :imgType="3">
+    <ShowCom :round="true" :styleBackground="'#77c0ff'" :span1="'tvoc'" :span2="delection.tvoc" :imgType="3">
       <img slot="part2bg" class="part2bg" src="../../../assets/images/monitor/part2bg.png" alt="">
     </ShowCom>
   </div>
 
 </template>
   <script>
+  import {getSensorInfo} from '@/api/sensor'
+
 import TitleCom from '../../component/title.vue'
 import TitleDetail from '../../component/titleDetail.vue'
 import ShowCom from './showCom.vue'
+import deviceMixins from "@/mixins/device";
 export default {
   components: { TitleCom, TitleDetail,ShowCom },
+  mixins:[deviceMixins],
   data() {
     return {
+      delection:{
+        wendu:'26.3℃',
+        shidu:'68%',
+        co2:'358ppm',
+        jiaquan:'0.07mg',
+        qiya:'760mmHg',
+        pm:'35μg/m³',
+        tvoc:'0.45mg'
+      }
 
     }
 
   },
+  created(){
+    // this.getSensorInfo()//传感器数据 1分钟更新一次 默认取第一个
+  },
   methods: {
+   
 
   }
 }
